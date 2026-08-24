@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guess The Rank Upload</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>
+        🎯 Guess The Rank
+    </h1>
+
+    <p>
+        Sende deinen Valorant-Clip ein.
+    </p>
+
+    <input
+        id="riotName"
+        placeholder="Riot Name">
+
+    <select id="rank">
+
+        <option value="">
+            Rang wählen
+        </option>
+
+        <option>Iron</option>
+        <option>Bronze</option>
+        <option>Silber</option>
+        <option>Gold</option>
+        <option>Platin</option>
+        <option>Diamant</option>
+        <option>Ascendant</option>
+        <option>Immortal</option>
+        <option>Radiant</option>
+
+    </select>
+
+    <input
+        id="clip"
+        type="file"
+        accept="video/mp4">
+
+    <button onclick="uploadClip()">
+        📤 Clip hochladen
+    </button>
+
+    <p id="status"></p>
+
+</div>
+
+<script src="upload.js"></script>
+
+</body>
+</html>
