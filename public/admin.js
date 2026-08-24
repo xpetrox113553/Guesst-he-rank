@@ -58,3 +58,25 @@ async function loadClips() {
     });
 
 }
+function guess(realRank, selectedRank) {
+
+    if (realRank === selectedRank) {
+
+        alert(
+            "✅ RICHTIG!\n\nRang: " +
+            realRank
+        );
+
+    } else {
+
+        alert(
+            "❌ FALSCH!\n\n" +
+            "Dein Tipp: " +
+            selectedRank +
+            "\n\nEchter Rang: " +
+            realRank
+        );
+
+    }
+
+}
