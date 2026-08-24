@@ -100,8 +100,11 @@ app.post(
                     });
 
             if (insertError) {
+                console.error("INSERT ERROR:", insertError);
                 throw insertError;
             }
+
+            console.log("INSERT OK");
 
             res.json({
                 success: true
