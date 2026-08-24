@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guess The Rank Admin</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card">
+
+    <h1>🎯 Guess The Rank Admin</h1>
+
+    <button onclick="loadClips()">
+        Clips laden
+    </button>
+
+    <div id="clips"></div>
+
+</div>
+
+<script src="admin.js"></script>
+
+</body>
+</html>
