@@ -36,11 +36,19 @@ async function loadClips() {
                     ${item.riot_name}
                 </p>
 
-                <button
-                    onclick="alert('Rang: ${item.rank}')">
+               <div class="ranks">
 
-                    Rang aufdecken
+<button onclick="guess('${item.rank}','Iron')">Iron</button>
+<button onclick="guess('${item.rank}','Bronze')">Bronze</button>
+<button onclick="guess('${item.rank}','Silver')">Silver</button>
+<button onclick="guess('${item.rank}','Gold')">Gold</button>
+<button onclick="guess('${item.rank}','Platin')">Platin</button>
+<button onclick="guess('${item.rank}','Diamant')">Diamant</button>
+<button onclick="guess('${item.rank}','Ascendant')">Ascendant</button>
+<button onclick="guess('${item.rank}','Immortal')">Immortal</button>
+<button onclick="guess('${item.rank}','Radiant')">Radiant</button>
 
+</div>
                 </button>
 
             </div>
