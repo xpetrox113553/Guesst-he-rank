@@ -60,22 +60,23 @@ async function loadClips() {
 }
 function guess(realRank, selectedRank) {
 
+    const result =
+        document.getElementById("result");
+
     if (realRank === selectedRank) {
 
-        alert(
-            "✅ RICHTIG!\n\nRang: " +
-            realRank
-        );
+        result.innerHTML = `
+            <h2>✅ RICHTIG!</h2>
+            <p>Rang: ${realRank}</p>
+        `;
 
     } else {
 
-        alert(
-            "❌ FALSCH!\n\n" +
-            "Dein Tipp: " +
-            selectedRank +
-            "\n\nEchter Rang: " +
-            realRank
-        );
+        result.innerHTML = `
+            <h2>❌ FALSCH!</h2>
+            <p>Dein Tipp: ${selectedRank}</p>
+            <p>Echter Rang: ${realRank}</p>
+        `;
 
     }
 
