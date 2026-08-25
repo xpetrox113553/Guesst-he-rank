@@ -63,19 +63,39 @@ function guess(realRank, selectedRank) {
     const result =
         document.getElementById("result");
 
+    const img =
+        rankImages[realRank];
+
     if (realRank === selectedRank) {
 
         result.innerHTML = `
             <h2>✅ RICHTIG!</h2>
-            <p>Rang: ${realRank}</p>
+
+            <img
+                src="${img}"
+                width="180">
+
+            <p>${realRank}</p>
         `;
 
     } else {
 
         result.innerHTML = `
             <h2>❌ FALSCH!</h2>
-            <p>Dein Tipp: ${selectedRank}</p>
-            <p>Echter Rang: ${realRank}</p>
+
+            <p>
+                Dein Tipp:
+                ${selectedRank}
+            </p>
+
+            <img
+                src="${img}"
+                width="180">
+
+            <p>
+                Echter Rang:
+                ${realRank}
+            </p>
         `;
 
     }
