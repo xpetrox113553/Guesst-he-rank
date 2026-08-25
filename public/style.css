@@ -39,3 +39,19 @@ button{
 .rank-icon:hover{
     transform:scale(1.1);
 }
+.ranks{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+}
+
+.rank-icon{
+    width:70px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.rank-icon:hover{
+    transform:scale(1.1);
+}
