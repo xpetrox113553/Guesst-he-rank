@@ -63,6 +63,7 @@ function guess(realRank, selectedRank) {
     const result =
         document.getElementById("result");
 
+    console.log("realRank:", realRank);
     const img =
         rankImages[realRank];
 
