@@ -9,10 +9,10 @@ body{
 }
 
 .card{
-    width:500px;
-    background:#1c1f2f;
+    width:95%;
+    max-width:1400px;
+    margin:auto;
     padding:30px;
-    border-radius:20px;
 }
 
 input,
