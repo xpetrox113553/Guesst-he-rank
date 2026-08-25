@@ -102,13 +102,13 @@ function guess(realRank, selectedRank) {
 
 }
 const rankImages = {
-    "Iron": "/ranks/iron.png",
-    "Bronze": "/ranks/bronze.png",
-    "Silver": "/ranks/silver.png",
-    "Gold": "/ranks/gold.png",
-    "Platin": "/ranks/platinum.png",
-    "Diamant": "/ranks/diamond.png",
-    "Ascendant": "/ranks/ascendant.png",
-    "Immortal": "/ranks/immortal.png",
-    "Radiant": "/ranks/radiant.png"
+    "Iron": "/Iron_1_Rank.webp",
+    "Bronze": "/Bronze_1_Rank.webp",
+    "Silver": "/Silver_1_Rank.webp",
+    "Gold": "/Gold_1_Rank.webp",
+    "Platin": "/Platinum_1_Rank.webp",
+    "Diamant": "/Diamond_1_Rank.webp",
+    "Ascendant": "/Ascendant_1_Rank.webp",
+    "Immortal": "/Immortal_1_Rank.webp",
+    "Radiant": "/Radiant_Rank.webp"
 };
