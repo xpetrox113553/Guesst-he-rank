@@ -29,3 +29,13 @@ button{
     cursor:pointer;
     font-weight:bold;
 }
+.rank-icon{
+    width:80px;
+    cursor:pointer;
+    margin:5px;
+    transition:0.2s;
+}
+
+.rank-icon:hover{
+    transform:scale(1.1);
+}
