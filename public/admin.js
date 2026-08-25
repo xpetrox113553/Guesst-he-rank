@@ -81,3 +81,14 @@ function guess(realRank, selectedRank) {
     }
 
 }
+const rankImages = {
+    "Iron": "/ranks/iron.png",
+    "Bronze": "/ranks/bronze.png",
+    "Silver": "/ranks/silver.png",
+    "Gold": "/ranks/gold.png",
+    "Platin": "/ranks/platinum.png",
+    "Diamant": "/ranks/diamond.png",
+    "Ascendant": "/ranks/ascendant.png",
+    "Immortal": "/ranks/immortal.png",
+    "Radiant": "/ranks/radiant.png"
+};
