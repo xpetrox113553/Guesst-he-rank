@@ -38,17 +38,20 @@ async function loadClips() {
 
                <div class="ranks">
 
-<button onclick="guess('${item.rank}','Iron')">Iron</button>
-<button onclick="guess('${item.rank}','Bronze')">Bronze</button>
-<button onclick="guess('${item.rank}','Silver')">Silver</button>
-<button onclick="guess('${item.rank}','Gold')">Gold</button>
-<button onclick="guess('${item.rank}','Platinum')">Platinum</button>
-<button onclick="guess('${item.rank}','Diamond')">Diamond</button>
-<button onclick="guess('${item.rank}','Ascendant')">Ascendant</button>
-<button onclick="guess('${item.rank}','Immortal')">Immortal</button>
-<button onclick="guess('${item.rank}','Radiant')">Radiant</button>
+<div class="ranks">
+
+<img class="rank-icon" src="/Iron_1_Rank.webp" onclick="guess('${item.rank}','Iron')">
+<img class="rank-icon" src="/Bronze_1_Rank.webp" onclick="guess('${item.rank}','Bronze')">
+<img class="rank-icon" src="/Silver_1_Rank.webp" onclick="guess('${item.rank}','Silver')">
+<img class="rank-icon" src="/Gold_1_Rank.webp" onclick="guess('${item.rank}','Gold')">
+<img class="rank-icon" src="/Platinum_1_Rank.webp" onclick="guess('${item.rank}','Platinum')">
+<img class="rank-icon" src="/Diamond_1_Rank.webp" onclick="guess('${item.rank}','Diamond')">
+<img class="rank-icon" src="/Ascendant_1_Rank.webp" onclick="guess('${item.rank}','Ascendant')">
+<img class="rank-icon" src="/Immortal_1_Rank.webp" onclick="guess('${item.rank}','Immortal')">
+<img class="rank-icon" src="/Radiant_Rank.webp" onclick="guess('${item.rank}','Radiant')">
 
 </div>
+
                 </button>
 
             </div>
