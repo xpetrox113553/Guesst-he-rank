@@ -3,55 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guess The Rank Upload</title>
+<title>Guess The Rank Submission</title>
 
-<link rel="stylesheet" href="style.css">
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#0f1923;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    margin:0;
+}
+
+.card{
+    background:#1b2733;
+    padding:30px;
+    border-radius:20px;
+    width:500px;
+    max-width:95%;
+}
+
+h1{
+    text-align:center;
+}
+
+input,select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+    background:#ff4655;
+    color:white;
+    font-weight:bold;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+#status{
+    margin-top:15px;
+    text-align:center;
+}
+</style>
 </head>
-
 <body>
 
 <div class="card">
 
-    <h1>
-        🎯 Guess The Rank
-    </h1>
+<h1>🎯 Guess The Rank</h1>
 
-    <p>
-        Sende deinen Valorant-Clip ein.
-    </p>
+<p>Lade deinen Valorant Clip hoch.</p>
 
-    <input
-        id="riotName"
-        placeholder="Riot Name">
+<input id="riotName" placeholder="Riot Name">
 
-    <select id="rank">
+<select id="rank">
+<option>Iron</option>
+<option>Bronze</option>
+<option>Silver</option>
+<option>Gold</option>
+<option>Platin</option>
+<option>Diamant</option>
+<option>Ascendant</option>
+<option>Immortal</option>
+<option>Radiant</option>
+</select>
 
-        <option value="">
-            Rang wählen
-        </option>
+<input id="clip" type="file" accept="video/*">
 
-        <option>Iron</option>
-        <option>Bronze</option>
-        <option>Silber</option>
-        <option>Gold</option>
-        <option>Platin</option>
-        <option>Diamant</option>
-        <option>Ascendant</option>
-        <option>Immortal</option>
-        <option>Radiant</option>
+<button onclick="uploadClip()">
+📤 Clip hochladen
+</button>
 
-    </select>
-
-    <input
-        id="clip"
-        type="file"
-        accept="video/mp4">
-
-    <button onclick="uploadClip()">
-        📤 Clip hochladen
-    </button>
-
-    <p id="status"></p>
+<div id="status"></div>
 
 </div>
 
