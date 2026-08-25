@@ -42,8 +42,8 @@ async function loadClips() {
 <button onclick="guess('${item.rank}','Bronze')">Bronze</button>
 <button onclick="guess('${item.rank}','Silver')">Silver</button>
 <button onclick="guess('${item.rank}','Gold')">Gold</button>
-<button onclick="guess('${item.rank}','Platin')">Platin</button>
-<button onclick="guess('${item.rank}','Diamant')">Diamant</button>
+<button onclick="guess('${item.rank}','Platinum')">Platinum</button>
+<button onclick="guess('${item.rank}','Diamond')">Diamond</button>
 <button onclick="guess('${item.rank}','Ascendant')">Ascendant</button>
 <button onclick="guess('${item.rank}','Immortal')">Immortal</button>
 <button onclick="guess('${item.rank}','Radiant')">Radiant</button>
