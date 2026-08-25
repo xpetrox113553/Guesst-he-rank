@@ -59,6 +59,9 @@ async function loadClips() {
 
 }
 function guess(realRank, selectedRank) {
+    realRank = realRank
+    .replace("Diamant", "Diamond")
+    .replace("Platin", "Platinum");
 
     const result =
         document.getElementById("result");
