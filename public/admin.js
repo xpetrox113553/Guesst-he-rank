@@ -108,6 +108,10 @@ const rankImages = {
     "Gold": "/Gold_1_Rank.webp",
     "Platinum": "/Platinum_1_Rank.webp",
     "Diamond": "/Diamond_1_Rank.webp",
+
+    "Platin": "/Platinum_1_Rank.webp",
+    "Diamant": "/Diamond_1_Rank.webp",
+
     "Ascendant": "/Ascendant_1_Rank.webp",
     "Immortal": "/Immortal_1_Rank.webp",
     "Radiant": "/Radiant_Rank.webp"
