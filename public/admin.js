@@ -26,11 +26,14 @@ async function loadClips() {
             ">
 
                 <video
-                    controls
-                    width="100%"
-                    src="${item.clip_url}">
-                </video>
-
+    controls
+    style="
+        width:100%;
+        max-height:700px;
+        border-radius:15px;
+    "
+    src="${item.clip_url}">
+</video>
                 <p>
                     Spieler:
                     ${item.riot_name}
