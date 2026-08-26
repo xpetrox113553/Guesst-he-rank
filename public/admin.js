@@ -81,11 +81,9 @@ style.innerHTML = `
 
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
 
-
 * {
     box-sizing: border-box;
 }
-
 
 html,
 body {
@@ -94,19 +92,11 @@ body {
     min-height: 100%;
 }
 
-
 body {
     min-height: 100vh;
-
-    font-family:
-        'Rajdhani',
-        Arial,
-        sans-serif;
-
+    font-family: 'Rajdhani', Arial, sans-serif;
     background: #08090d;
-
     color: white;
-
     overflow-x: hidden;
 }
 
@@ -116,17 +106,11 @@ body {
 ======================================== */
 
 .login-screen {
-
     min-height: 100vh;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     position: relative;
-
     overflow: hidden;
 
     background:
@@ -143,16 +127,11 @@ body {
         );
 }
 
-
 .login-screen::before {
-
     content: "";
-
     position: absolute;
-
     top: 0;
     left: 0;
-
     width: 100%;
     height: 4px;
 
@@ -162,13 +141,9 @@ body {
         0 0 25px #ff4655;
 }
 
-
 .login-grid {
-
     position: absolute;
-
     inset: 0;
-
     opacity: 0.10;
 
     background-image:
@@ -185,9 +160,7 @@ body {
     background-size: 60px 60px;
 }
 
-
 .login-glow {
-
     position: absolute;
 
     width: 500px;
@@ -201,17 +174,12 @@ body {
     filter: blur(100px);
 }
 
-
 .login-box {
+    width: min(440px, calc(100% - 35px));
 
-    width:
-        min(440px, calc(100% - 35px));
-
-    padding:
-        45px 42px;
+    padding: 45px 42px;
 
     position: relative;
-
     z-index: 2;
 
     text-align: center;
@@ -231,9 +199,7 @@ body {
         0 0 50px rgba(255,70,85,0.06);
 }
 
-
 .login-box::before {
-
     content: "";
 
     position: absolute;
@@ -250,9 +216,7 @@ body {
         0 0 20px #ff4655;
 }
 
-
 .login-box::after {
-
     content: "";
 
     position: absolute;
@@ -270,24 +234,19 @@ body {
         2px solid rgba(255,70,85,0.5);
 }
 
-
 .login-logo {
-
     width: 65px;
     height: 65px;
 
-    margin:
-        0 auto 14px;
+    margin: 0 auto 14px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     background: #ff4655;
 
     font-size: 34px;
-
     font-weight: 700;
 
     clip-path:
@@ -302,23 +261,17 @@ body {
         0 0 30px rgba(255,70,85,0.45);
 }
 
-
 .login-small {
-
     color: #ff4655;
 
     font-size: 12px;
-
     font-weight: 700;
 
     letter-spacing: 5px;
 }
 
-
 .login-box h1 {
-
-    margin:
-        5px 0 0;
+    margin: 5px 0 0;
 
     font-size: 36px;
 
@@ -327,14 +280,11 @@ body {
     text-transform: uppercase;
 }
 
-
 .login-line {
-
     width: 70px;
     height: 3px;
 
-    margin:
-        14px auto;
+    margin: 14px auto;
 
     background: #ff4655;
 
@@ -342,11 +292,8 @@ body {
         0 0 12px rgba(255,70,85,0.7);
 }
 
-
 .login-subtitle {
-
-    margin:
-        0 0 35px;
+    margin: 0 0 35px;
 
     color: #777d88;
 
@@ -355,9 +302,7 @@ body {
     letter-spacing: 3px;
 }
 
-
 .login-box label {
-
     display: block;
 
     margin-bottom: 8px;
@@ -373,15 +318,11 @@ body {
     letter-spacing: 2px;
 }
 
-
 #adminPassword {
-
     width: 100%;
-
     height: 52px;
 
-    padding:
-        0 16px;
+    padding: 0 16px;
 
     outline: none;
 
@@ -404,25 +345,19 @@ body {
         box-shadow 0.2s ease;
 }
 
-
 #adminPassword:focus {
-
     border-color: #ff4655;
 
     box-shadow:
         0 0 20px rgba(255,70,85,0.15);
 }
 
-
 #adminPassword::placeholder {
     color: #555a64;
 }
 
-
 .login-box button {
-
     width: 100%;
-
     height: 52px;
 
     margin-top: 18px;
@@ -460,20 +395,15 @@ body {
         box-shadow 0.15s ease;
 }
 
-
 .login-box button:hover {
-
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 
     box-shadow:
         0 10px 30px
         rgba(255,70,85,0.35);
 }
 
-
 .login-error {
-
     min-height: 22px;
 
     margin-top: 14px;
@@ -487,9 +417,7 @@ body {
     letter-spacing: 1px;
 }
 
-
 .login-status {
-
     margin-top: 25px;
 
     color: #555a64;
@@ -499,9 +427,7 @@ body {
     letter-spacing: 2px;
 }
 
-
 .login-status span {
-
     display: inline-block;
 
     width: 6px;
@@ -517,13 +443,10 @@ body {
         0 0 8px #ff4655;
 }
 
-
 .login-wrong {
-
     animation:
         loginShake 0.25s ease;
 }
-
 
 @keyframes loginShake {
 
@@ -546,7 +469,6 @@ body {
     100% {
         transform: translateX(0);
     }
-
 }
 
 
@@ -555,7 +477,6 @@ body {
 ======================================== */
 
 .valo-background {
-
     min-height: 100vh;
 
     position: relative;
@@ -576,9 +497,7 @@ body {
         );
 }
 
-
 .valo-background::before {
-
     content: "";
 
     position: fixed;
@@ -597,9 +516,7 @@ body {
     z-index: 20;
 }
 
-
 .valo-background::after {
-
     content: "";
 
     position: fixed;
@@ -619,9 +536,7 @@ body {
     pointer-events: none;
 }
 
-
 .valo-grid {
-
     position: fixed;
 
     inset: 0;
@@ -650,7 +565,6 @@ body {
 ======================================== */
 
 .agent-bg {
-
     position: fixed;
 
     z-index: 1;
@@ -671,17 +585,9 @@ body {
             0 0 35px
             rgba(255,70,85,0.12)
         );
-
-    transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
 }
 
-
-/* WAYLAY */
-
 .waylay-bg {
-
     left: -125px;
 
     bottom: -90px;
@@ -689,16 +595,9 @@ body {
     width: 560px;
 
     max-height: 82vh;
-
-    object-position:
-        bottom left;
 }
 
-
-/* RAZE */
-
 .raze-bg {
-
     right: -135px;
 
     bottom: -80px;
@@ -706,16 +605,9 @@ body {
     width: 570px;
 
     max-height: 82vh;
-
-    object-position:
-        bottom right;
 }
 
-
-/* WAYLAY ICON */
-
 .agent-icon-bg {
-
     position: fixed;
 
     right: 38px;
@@ -740,11 +632,7 @@ body {
         );
 }
 
-
-/* DARK OVERLAY */
-
 .agent-overlay {
-
     position: fixed;
 
     inset: 0;
@@ -769,7 +657,6 @@ body {
 ======================================== */
 
 .topbar {
-
     height: 88px;
 
     display: flex;
@@ -778,8 +665,7 @@ body {
 
     justify-content: space-between;
 
-    padding:
-        0 45px;
+    padding: 0 45px;
 
     background:
         rgba(8,9,13,0.90);
@@ -795,9 +681,7 @@ body {
     z-index: 10;
 }
 
-
 .logo {
-
     display: flex;
 
     align-items: center;
@@ -805,9 +689,7 @@ body {
     gap: 14px;
 }
 
-
 .logo-mark {
-
     width: 48px;
     height: 48px;
 
@@ -836,9 +718,7 @@ body {
         0 0 25px rgba(255,70,85,0.40);
 }
 
-
 .logo-title {
-
     font-size: 22px;
 
     font-weight: 700;
@@ -846,9 +726,7 @@ body {
     letter-spacing: 4px;
 }
 
-
 .logo-subtitle {
-
     font-size: 11px;
 
     letter-spacing: 3px;
@@ -856,15 +734,12 @@ body {
     color: #8d929d;
 }
 
-
 .admin-badge {
-
     font-size: 13px;
 
     letter-spacing: 2px;
 
-    padding:
-        11px 19px;
+    padding: 11px 19px;
 
     border:
         1px solid rgba(255,70,85,0.4);
@@ -875,9 +750,7 @@ body {
     color: #ff7b86;
 }
 
-
 .status-dot {
-
     display: inline-block;
 
     width: 7px;
@@ -896,7 +769,6 @@ body {
         pulseDot 1.5s infinite;
 }
 
-
 @keyframes pulseDot {
 
     0%,
@@ -907,7 +779,6 @@ body {
     50% {
         opacity: 0.4;
     }
-
 }
 
 
@@ -916,7 +787,6 @@ body {
 ======================================== */
 
 .main {
-
     width:
         min(1250px, calc(100% - 40px));
 
@@ -931,9 +801,7 @@ body {
     z-index: 5;
 }
 
-
 .quiz-header {
-
     display: flex;
 
     justify-content: space-between;
@@ -945,9 +813,7 @@ body {
     margin-bottom: 30px;
 }
 
-
 .small-title {
-
     color: #ff4655;
 
     font-size: 13px;
@@ -957,9 +823,7 @@ body {
     letter-spacing: 5px;
 }
 
-
 .quiz-header h1 {
-
     margin:
         7px 0 0;
 
@@ -973,9 +837,7 @@ body {
     letter-spacing: 1px;
 }
 
-
 .header-line {
-
     width: 100px;
 
     height: 3px;
@@ -988,9 +850,7 @@ body {
         0 0 15px rgba(255,70,85,0.7);
 }
 
-
 .score-box {
-
     min-width: 155px;
 
     padding:
@@ -1005,9 +865,7 @@ body {
         3px solid #ff4655;
 }
 
-
 .score-box span {
-
     display: block;
 
     color: #777d88;
@@ -1017,9 +875,7 @@ body {
     letter-spacing: 3px;
 }
 
-
 .score-box strong {
-
     display: block;
 
     margin-top: 2px;
@@ -1033,7 +889,6 @@ body {
 ======================================== */
 
 .card {
-
     position: relative;
 
     background:
@@ -1054,9 +909,7 @@ body {
     overflow: hidden;
 }
 
-
 .card::before {
-
     content: "";
 
     position: absolute;
@@ -1073,9 +926,7 @@ body {
         0 0 20px rgba(255,70,85,0.8);
 }
 
-
 .card::after {
-
     content: "";
 
     position: absolute;
@@ -1099,7 +950,6 @@ body {
 ======================================== */
 
 .clip-header {
-
     display: flex;
 
     justify-content: space-between;
@@ -1114,9 +964,7 @@ body {
         1px solid rgba(255,255,255,0.07);
 }
 
-
 .clip-number {
-
     color: #ff4655;
 
     font-size: 15px;
@@ -1126,9 +974,7 @@ body {
     letter-spacing: 3px;
 }
 
-
 .clip-label {
-
     color: #777d88;
 
     font-size: 12px;
@@ -1142,7 +988,6 @@ body {
 ======================================== */
 
 .video-wrapper {
-
     position: relative;
 
     width: 100%;
@@ -1156,9 +1001,7 @@ body {
         0 25px 60px rgba(0,0,0,0.55);
 }
 
-
 .card video {
-
     display: block;
 
     width: 100% !important;
@@ -1180,7 +1023,6 @@ body {
 ======================================== */
 
 .player-info {
-
     display: flex;
 
     align-items: center;
@@ -1199,9 +1041,7 @@ body {
         3px solid #ff4655;
 }
 
-
 .player-label {
-
     color: #777d88;
 
     font-size: 11px;
@@ -1209,9 +1049,7 @@ body {
     letter-spacing: 3px;
 }
 
-
 .player-name {
-
     color: white;
 
     font-size: 20px;
@@ -1227,11 +1065,9 @@ body {
 ======================================== */
 
 .question-box {
-
     margin-top: 28px;
 
-    padding:
-        22px;
+    padding: 22px;
 
     text-align: center;
 
@@ -1242,9 +1078,7 @@ body {
         1px solid rgba(255,255,255,0.06);
 }
 
-
 .question-label {
-
     color: #ff4655;
 
     font-size: 12px;
@@ -1256,9 +1090,7 @@ body {
     margin-bottom: 5px;
 }
 
-
 .card h3 {
-
     margin: 0;
 
     text-transform: uppercase;
@@ -1270,25 +1102,29 @@ body {
 
 
 /* ========================================
-   RANKS
+   RANK GROUPS
 ======================================== */
 
-.ranks {
+.rank-groups {
 
     display: grid;
 
     grid-template-columns:
         repeat(9, 1fr);
 
-    gap: 12px;
+    gap: 10px;
 
-    margin-top: 20px;
+    margin-top: 22px;
 }
 
 
-.rank-choice {
+.rank-group {
 
     position: relative;
+
+    min-height: 120px;
+
+    padding: 8px;
 
     display: flex;
 
@@ -1297,10 +1133,6 @@ body {
     align-items: center;
 
     justify-content: center;
-
-    min-height: 120px;
-
-    padding: 10px;
 
     background:
         linear-gradient(
@@ -1322,53 +1154,62 @@ body {
 }
 
 
-.rank-choice:hover {
+.rank-group:hover {
 
     transform:
-        translateY(-7px);
+        translateY(-6px);
 
-    border:
-        1px solid #ff4655;
+    border-color:
+        #ff4655;
 
     background:
         rgba(255,70,85,0.10);
 
     box-shadow:
-        0 12px 30px rgba(255,70,85,0.18);
+        0 12px 30px
+        rgba(255,70,85,0.18);
 }
 
 
-.rank-icon {
+.rank-group.active {
 
-    width: 78px;
-    height: 78px;
+    border-color:
+        #ff4655;
+
+    background:
+        rgba(255,70,85,0.10);
+
+    box-shadow:
+        0 0 25px
+        rgba(255,70,85,0.15);
+}
+
+
+.rank-main-icon {
+
+    width: 70px;
+    height: 70px;
 
     object-fit: contain;
 
     transition:
-        transform 0.18s ease,
-        filter 0.18s ease;
+        transform 0.18s ease;
 }
 
 
-.rank-choice:hover .rank-icon {
+.rank-group:hover
+.rank-main-icon {
 
     transform:
-        scale(1.10);
-
-    filter:
-        drop-shadow(
-            0 0 12px
-            rgba(255,70,85,0.55)
-        );
+        scale(1.08);
 }
 
 
-.rank-name {
+.rank-group-name {
 
     margin-top: 4px;
 
-    color: #8d929d;
+    color: #b8bbc2;
 
     font-size: 10px;
 
@@ -1381,19 +1222,236 @@ body {
 
 
 /* ========================================
+   SUB RANKS
+======================================== */
+
+.sub-ranks {
+
+    display: none;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-top: 18px;
+
+    padding: 18px;
+
+    background:
+        rgba(0,0,0,0.30);
+
+    border:
+        1px solid rgba(255,255,255,0.07);
+
+    border-top:
+        2px solid #ff4655;
+
+    animation:
+        subRankIn 0.2s ease;
+}
+
+
+.sub-ranks.open {
+
+    display: grid;
+}
+
+
+@keyframes subRankIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-8px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+.sub-rank {
+
+    min-height: 150px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 12px;
+
+    background:
+        rgba(255,255,255,0.035);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        border 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+
+.sub-rank:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        #ff4655;
+
+    background:
+        rgba(255,70,85,0.10);
+
+    box-shadow:
+        0 10px 25px
+        rgba(255,70,85,0.18);
+}
+
+
+.sub-rank img {
+
+    width: 90px;
+    height: 90px;
+
+    object-fit: contain;
+
+    transition:
+        transform 0.18s ease;
+}
+
+
+.sub-rank:hover img {
+
+    transform:
+        scale(1.08);
+
+    filter:
+        drop-shadow(
+            0 0 14px
+            rgba(255,70,85,0.45)
+        );
+}
+
+
+.sub-rank-name {
+
+    margin-top: 6px;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+/* ========================================
+   RADIANT
+======================================== */
+
+.radiant-choice {
+
+    min-height: 150px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: 18px;
+
+    padding: 15px;
+
+    background:
+        rgba(255,255,255,0.035);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        border 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+
+.radiant-choice:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        #ff4655;
+
+    background:
+        rgba(255,70,85,0.10);
+
+    box-shadow:
+        0 10px 30px
+        rgba(255,70,85,0.20);
+}
+
+
+.radiant-choice img {
+
+    width: 100px;
+    height: 100px;
+
+    object-fit: contain;
+}
+
+
+.radiant-choice span {
+
+    margin-top: 5px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+/* ========================================
    RESULT
 ======================================== */
 
 #result {
-
     margin-top: 25px;
 }
 
 
 .result-box {
 
-    padding:
-        25px;
+    padding: 25px;
 
     text-align: center;
 
@@ -1426,9 +1484,8 @@ body {
 
 .result-box img {
 
-    width: 140px;
-
-    height: 140px;
+    width: 150px;
+    height: 150px;
 
     object-fit: contain;
 
@@ -1474,13 +1531,22 @@ body {
         transform:
             translateY(0);
     }
-
 }
 
 
 /* ========================================
-   BUTTON
+   NEXT BUTTON
 ======================================== */
+
+.next-button-wrapper {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 22px;
+}
+
 
 button {
 
@@ -1532,23 +1598,6 @@ button:hover {
     box-shadow:
         0 10px 30px
         rgba(255,70,85,0.40);
-}
-
-
-button:active {
-
-    transform:
-        translateY(0);
-}
-
-
-.next-button-wrapper {
-
-    display: flex;
-
-    justify-content: flex-end;
-
-    margin-top: 22px;
 }
 
 
@@ -1626,14 +1675,13 @@ button:active {
    MOBILE
 ======================================== */
 
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
 
-    .ranks {
+    .rank-groups {
 
         grid-template-columns:
             repeat(5, 1fr);
     }
-
 
     .waylay-bg {
 
@@ -1644,7 +1692,6 @@ button:active {
         width: 480px;
     }
 
-
     .raze-bg {
 
         right: -190px;
@@ -1653,7 +1700,6 @@ button:active {
 
         width: 490px;
     }
-
 }
 
 
@@ -1665,7 +1711,6 @@ button:active {
             0 20px;
     }
 
-
     .main {
 
         width:
@@ -1674,7 +1719,6 @@ button:active {
         padding-top:
             30px;
     }
-
 
     .quiz-header {
 
@@ -1685,13 +1729,11 @@ button:active {
             column;
     }
 
-
     .score-box {
 
         text-align:
             left;
     }
-
 
     .card {
 
@@ -1699,33 +1741,30 @@ button:active {
             18px;
     }
 
-
     .card video {
 
         min-height:
             220px;
     }
 
-
-    .ranks {
+    .rank-groups {
 
         grid-template-columns:
             repeat(3, 1fr);
     }
 
-
     .waylay-bg,
     .raze-bg {
 
-        opacity: 0.12;
+        opacity:
+            0.12;
     }
-
 
     .agent-icon-bg {
 
-        display: none;
+        display:
+            none;
     }
-
 }
 
 
@@ -1737,7 +1776,6 @@ button:active {
             none;
     }
 
-
     .admin-badge {
 
         font-size:
@@ -1747,35 +1785,55 @@ button:active {
             8px;
     }
 
-
     .logo-title {
 
         font-size:
             18px;
     }
 
-
-    .ranks {
+    .rank-groups {
 
         grid-template-columns:
             repeat(3, 1fr);
     }
 
-
-    .rank-choice {
-
-        min-height:
-            100px;
-    }
-
-
-    .rank-icon {
+    .rank-main-icon {
 
         width:
-            62px;
+            58px;
 
         height:
-            62px;
+            58px;
+    }
+
+    .sub-ranks {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        padding:
+            10px;
+
+        gap:
+            7px;
+    }
+
+    .sub-rank {
+
+        min-height:
+            120px;
+
+        padding:
+            5px;
+    }
+
+    .sub-rank img {
+
+        width:
+            65px;
+
+        height:
+            65px;
     }
 
 }
@@ -1816,9 +1874,7 @@ function adminLogin() {
 
         startAdminPanel();
 
-    }
-
-    else {
+    } else {
 
         error.textContent =
             "❌ FALSCHES PASSWORT";
@@ -2002,6 +2058,204 @@ let score = 0;
 
 let total = 0;
 
+let answered = false;
+
+
+// ========================================
+// RANG-DATEN
+// ========================================
+
+const rankData = {
+
+    Iron: {
+        icon: "/Iron_1_Rank.webp",
+        levels: [
+            {
+                name: "Iron 1",
+                value: "Iron 1",
+                icon: "/Iron_1_Rank.webp"
+            },
+            {
+                name: "Iron 2",
+                value: "Iron 2",
+                icon: "/Iron_2_Rank.webp"
+            },
+            {
+                name: "Iron 3",
+                value: "Iron 3",
+                icon: "/Iron_3_Rank.webp"
+            }
+        ]
+    },
+
+
+    Bronze: {
+        icon: "/Bronze_1_Rank.webp",
+        levels: [
+            {
+                name: "Bronze 1",
+                value: "Bronze 1",
+                icon: "/Bronze_1_Rank.webp"
+            },
+            {
+                name: "Bronze 2",
+                value: "Bronze 2",
+                icon: "/Bronze_2_Rank.webp"
+            },
+            {
+                name: "Bronze 3",
+                value: "Bronze 3",
+                icon: "/Bronze_3_Rank.webp"
+            }
+        ]
+    },
+
+
+    Silver: {
+        icon: "/Silver_1_Rank.webp",
+        levels: [
+            {
+                name: "Silver 1",
+                value: "Silver 1",
+                icon: "/Silver_1_Rank.webp"
+            },
+            {
+                name: "Silver 2",
+                value: "Silver 2",
+                icon: "/Silver_2_Rank.webp"
+            },
+            {
+                name: "Silver 3",
+                value: "Silver 3",
+                icon: "/Silver_3_Rank.webp"
+            }
+        ]
+    },
+
+
+    Gold: {
+        icon: "/Gold_1_Rank.webp",
+        levels: [
+            {
+                name: "Gold 1",
+                value: "Gold 1",
+                icon: "/Gold_1_Rank.webp"
+            },
+            {
+                name: "Gold 2",
+                value: "Gold 2",
+                icon: "/Gold_2_Rank.webp"
+            },
+            {
+                name: "Gold 3",
+                value: "Gold 3",
+                icon: "/Gold_3_Rank.webp"
+            }
+        ]
+    },
+
+
+    Platinum: {
+        icon: "/Platinum_1_Rank.webp",
+        levels: [
+            {
+                name: "Platinum 1",
+                value: "Platinum 1",
+                icon: "/Platinum_1_Rank.webp"
+            },
+            {
+                name: "Platinum 2",
+                value: "Platinum 2",
+                icon: "/Platinum_2_Rank.webp"
+            },
+            {
+                name: "Platinum 3",
+                value: "Platinum 3",
+                icon: "/Platinum_3_Rank.webp"
+            }
+        ]
+    },
+
+
+    Diamond: {
+        icon: "/Diamond_1_Rank.webp",
+        levels: [
+            {
+                name: "Diamond 1",
+                value: "Diamond 1",
+                icon: "/Diamond_1_Rank.webp"
+            },
+            {
+                name: "Diamond 2",
+                value: "Diamond 2",
+                icon: "/Diamond_2_Rank.webp"
+            },
+            {
+                name: "Diamond 3",
+                value: "Diamond 3",
+                icon: "/Diamond_3_Rank.webp"
+            }
+        ]
+    },
+
+
+    Ascendant: {
+        icon: "/Ascendant_1_Rank.webp",
+        levels: [
+            {
+                name: "Ascendant 1",
+                value: "Ascendant 1",
+                icon: "/Ascendant_1_Rank.webp"
+            },
+            {
+                name: "Ascendant 2",
+                value: "Ascendant 2",
+                icon: "/Ascendant_2_Rank.webp"
+            },
+            {
+                name: "Ascendant 3",
+                value: "Ascendant 3",
+                icon: "/Ascendant_3_Rank.webp"
+            }
+        ]
+    },
+
+
+    Immortal: {
+        icon: "/Immortal_1_Rank.webp",
+        levels: [
+            {
+                name: "Immortal 1",
+                value: "Immortal 1",
+                icon: "/Immortal_1_Rank.webp"
+            },
+            {
+                name: "Immortal 2",
+                value: "Immortal 2",
+                icon: "/Immortal_2_Rank.webp"
+            },
+            {
+                name: "Immortal 3",
+                value: "Immortal 3",
+                icon: "/Immortal_3_Rank.webp"
+            }
+        ]
+    },
+
+
+    Radiant: {
+        icon: "/Radiant_Rank.webp",
+        levels: [
+            {
+                name: "Radiant",
+                value: "Radiant",
+                icon: "/Radiant_Rank.webp"
+            }
+        ]
+    }
+
+};
+
 
 // ========================================
 // CLIPS LADEN
@@ -2035,6 +2289,8 @@ async function loadClips() {
         total =
             allClips.length;
 
+        answered = false;
+
 
         updateScore();
 
@@ -2067,6 +2323,10 @@ async function loadClips() {
                         Die Clips konnten nicht geladen werden.
                     </p>
 
+                    <p>
+                        ${error.message}
+                    </p>
+
                 </div>
 
             `;
@@ -2093,6 +2353,9 @@ function showClip() {
     if (!clips) {
         return;
     }
+
+
+    answered = false;
 
 
     if (currentClip >= allClips.length) {
@@ -2212,172 +2475,14 @@ function showClip() {
             </div>
 
 
-            <div class="ranks">
+            <div class="rank-groups">
 
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Iron')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Iron_1_Rank.webp"
-                        alt="Iron"
-                    >
-
-                    <div class="rank-name">
-                        Iron
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Bronze')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Bronze_1_Rank.webp"
-                        alt="Bronze"
-                    >
-
-                    <div class="rank-name">
-                        Bronze
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Silver')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Silver_1_Rank.webp"
-                        alt="Silver"
-                    >
-
-                    <div class="rank-name">
-                        Silver
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Gold')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Gold_1_Rank.webp"
-                        alt="Gold"
-                    >
-
-                    <div class="rank-name">
-                        Gold
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Platinum')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Platinum_1_Rank.webp"
-                        alt="Platinum"
-                    >
-
-                    <div class="rank-name">
-                        Platinum
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Diamond')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Diamond_1_Rank.webp"
-                        alt="Diamond"
-                    >
-
-                    <div class="rank-name">
-                        Diamond
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Ascendant')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Ascendant_1_Rank.webp"
-                        alt="Ascendant"
-                    >
-
-                    <div class="rank-name">
-                        Ascendant
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Immortal')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Immortal_1_Rank.webp"
-                        alt="Immortal"
-                    >
-
-                    <div class="rank-name">
-                        Immortal
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Radiant')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Radiant_Rank.webp"
-                        alt="Radiant"
-                    >
-
-                    <div class="rank-name">
-                        Radiant
-                    </div>
-
-                </div>
-
+                ${createRankGroups()}
 
             </div>
+
+
+            <div id="subRankContainer"></div>
 
 
             <div id="result"></div>
@@ -2404,21 +2509,243 @@ function showClip() {
 
 
 // ========================================
+// HAUPT-RÄNGE ERSTELLEN
+// ========================================
+
+function createRankGroups() {
+
+    let html = "";
+
+    const ranks = [
+        "Iron",
+        "Bronze",
+        "Silver",
+        "Gold",
+        "Platinum",
+        "Diamond",
+        "Ascendant",
+        "Immortal",
+        "Radiant"
+    ];
+
+
+    ranks.forEach(rank => {
+
+        const data =
+            rankData[rank];
+
+
+        html += `
+
+            <div
+                class="rank-group"
+                onclick="openRank('${rank}')"
+            >
+
+                <img
+                    class="rank-main-icon"
+                    src="${data.icon}"
+                    alt="${rank}"
+                >
+
+                <div class="rank-group-name">
+                    ${rank}
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    return html;
+
+}
+
+
+// ========================================
+// RANG ÖFFNEN
+// ========================================
+
+function openRank(rank) {
+
+    if (answered) {
+        return;
+    }
+
+
+    const container =
+        document.getElementById(
+            "subRankContainer"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    const data =
+        rankData[rank];
+
+
+    document
+        .querySelectorAll(".rank-group")
+        .forEach(group => {
+
+            group.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(".rank-group")
+        .forEach(group => {
+
+            const name =
+                group.querySelector(
+                    ".rank-group-name"
+                );
+
+            if (
+                name &&
+                name.textContent
+                    .trim()
+                    .toLowerCase() ===
+                    rank.toLowerCase()
+            ) {
+
+                group.classList.add(
+                    "active"
+                );
+
+            }
+
+        });
+
+
+    if (rank === "Radiant") {
+
+        container.innerHTML = `
+
+            <div
+                class="radiant-choice"
+                onclick="selectRank('Radiant')"
+            >
+
+                <img
+                    src="/Radiant_Rank.webp"
+                    alt="Radiant"
+                >
+
+                <span>
+                    RADIANT
+                </span>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    let html = `
+
+        <div class="sub-ranks open">
+
+    `;
+
+
+    data.levels.forEach(level => {
+
+        html += `
+
+            <div
+                class="sub-rank"
+                onclick="selectRank('${level.value}')"
+            >
+
+                <img
+                    src="${level.icon}"
+                    alt="${level.name}"
+                >
+
+                <div class="sub-rank-name">
+                    ${level.name}
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    html += `
+
+        </div>
+
+    `;
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+// ========================================
+// RANG AUSWÄHLEN
+// ========================================
+
+function selectRank(selectedRank) {
+
+    if (answered) {
+        return;
+    }
+
+
+    const item =
+        allClips[currentClip];
+
+
+    if (!item) {
+        return;
+    }
+
+
+    guess(
+        item.rank,
+        selectedRank
+    );
+
+}
+
+
+// ========================================
 // RANG RATEN
 // ========================================
 
 function guess(realRank, selectedRank) {
 
+    if (answered) {
+        return;
+    }
+
+
+    answered = true;
+
+
     realRank =
-        realRank
-            .replace(
-                "Diamant",
-                "Diamond"
-            )
-            .replace(
-                "Platin",
-                "Platinum"
-            );
+        normalizeRank(realRank);
+
+
+    selectedRank =
+        normalizeRank(selectedRank);
 
 
     const result =
@@ -2433,7 +2760,7 @@ function guess(realRank, selectedRank) {
 
 
     const img =
-        rankImages[realRank];
+        getRankImage(realRank);
 
 
     if (realRank === selectedRank) {
@@ -2529,21 +2856,210 @@ function guess(realRank, selectedRank) {
     }
 
 
-    const rankIcons =
-        document.querySelectorAll(
-            ".rank-choice"
+    document
+        .querySelectorAll(".rank-group")
+        .forEach(group => {
+
+            group.style.pointerEvents =
+                "none";
+
+            group.style.opacity =
+                "0.45";
+
+        });
+
+
+    document
+        .querySelectorAll(".sub-rank")
+        .forEach(rank => {
+
+            rank.style.pointerEvents =
+                "none";
+
+            rank.style.opacity =
+                "0.45";
+
+        });
+
+
+    const radiant =
+        document.querySelector(
+            ".radiant-choice"
         );
 
 
-    rankIcons.forEach(choice => {
+    if (radiant) {
 
-        choice.style.pointerEvents =
+        radiant.style.pointerEvents =
             "none";
 
-        choice.style.opacity =
+        radiant.style.opacity =
             "0.45";
 
-    });
+    }
+
+}
+
+
+// ========================================
+// RANG NORMALISIEREN
+// ========================================
+
+function normalizeRank(rank) {
+
+    if (!rank) {
+        return "";
+    }
+
+
+    let value =
+        String(rank)
+            .trim()
+            .replace(
+                "Diamant",
+                "Diamond"
+            )
+            .replace(
+                "Platin",
+                "Platinum"
+            );
+
+
+    return value;
+
+}
+
+
+// ========================================
+// RANG-BILD
+// ========================================
+
+function getRankImage(rank) {
+
+    const normalized =
+        normalizeRank(rank);
+
+
+    const images = {
+
+        "Iron 1":
+            "/Iron_1_Rank.webp",
+
+        "Iron 2":
+            "/Iron_2_Rank.webp",
+
+        "Iron 3":
+            "/Iron_3_Rank.webp",
+
+
+        "Bronze 1":
+            "/Bronze_1_Rank.webp",
+
+        "Bronze 2":
+            "/Bronze_2_Rank.webp",
+
+        "Bronze 3":
+            "/Bronze_3_Rank.webp",
+
+
+        "Silver 1":
+            "/Silver_1_Rank.webp",
+
+        "Silver 2":
+            "/Silver_2_Rank.webp",
+
+        "Silver 3":
+            "/Silver_3_Rank.webp",
+
+
+        "Gold 1":
+            "/Gold_1_Rank.webp",
+
+        "Gold 2":
+            "/Gold_2_Rank.webp",
+
+        "Gold 3":
+            "/Gold_3_Rank.webp",
+
+
+        "Platinum 1":
+            "/Platinum_1_Rank.webp",
+
+        "Platinum 2":
+            "/Platinum_2_Rank.webp",
+
+        "Platinum 3":
+            "/Platinum_3_Rank.webp",
+
+
+        "Diamond 1":
+            "/Diamond_1_Rank.webp",
+
+        "Diamond 2":
+            "/Diamond_2_Rank.webp",
+
+        "Diamond 3":
+            "/Diamond_3_Rank.webp",
+
+
+        "Ascendant 1":
+            "/Ascendant_1_Rank.webp",
+
+        "Ascendant 2":
+            "/Ascendant_2_Rank.webp",
+
+        "Ascendant 3":
+            "/Ascendant_3_Rank.webp",
+
+
+        "Immortal 1":
+            "/Immortal_1_Rank.webp",
+
+        "Immortal 2":
+            "/Immortal_2_Rank.webp",
+
+        "Immortal 3":
+            "/Immortal_3_Rank.webp",
+
+
+        "Radiant":
+            "/Radiant_Rank.webp",
+
+
+        /* Falls alte Clips noch
+           keinen Level haben */
+
+        "Iron":
+            "/Iron_1_Rank.webp",
+
+        "Bronze":
+            "/Bronze_1_Rank.webp",
+
+        "Silver":
+            "/Silver_1_Rank.webp",
+
+        "Gold":
+            "/Gold_1_Rank.webp",
+
+        "Platinum":
+            "/Platinum_1_Rank.webp",
+
+        "Diamond":
+            "/Diamond_1_Rank.webp",
+
+        "Ascendant":
+            "/Ascendant_1_Rank.webp",
+
+        "Immortal":
+            "/Immortal_1_Rank.webp"
+
+    };
+
+
+    return (
+        images[normalized] ||
+        "/Radiant_Rank.webp"
+    );
 
 }
 
@@ -2593,50 +3109,10 @@ function restartQuiz() {
 
     score = 0;
 
+    answered = false;
+
     updateScore();
 
     showClip();
 
 }
-
-
-// ========================================
-// RANG-BILDER
-// ========================================
-
-const rankImages = {
-
-    "Iron":
-        "/Iron_1_Rank.webp",
-
-    "Bronze":
-        "/Bronze_1_Rank.webp",
-
-    "Silver":
-        "/Silver_1_Rank.webp",
-
-    "Gold":
-        "/Gold_1_Rank.webp",
-
-    "Platinum":
-        "/Platinum_1_Rank.webp",
-
-    "Diamond":
-        "/Diamond_1_Rank.webp",
-
-    "Ascendant":
-        "/Ascendant_1_Rank.webp",
-
-    "Immortal":
-        "/Immortal_1_Rank.webp",
-
-    "Radiant":
-        "/Radiant_Rank.webp",
-
-    "Platin":
-        "/Platinum_1_Rank.webp",
-
-    "Diamant":
-        "/Diamond_1_Rank.webp"
-
-};
