@@ -1,182 +1,178 @@
-// ============================================================
+// ========================================
 // NOXIN99 VALORANT CLIP QUIZ
-// MONSTER ADMIN PANEL
-// ============================================================
-
-const ADMIN_PASSWORD = "Noxin99";
-
-let allClips = [];
-let currentClip = 0;
-
-let score = 0;
-let total = 0;
-
-let answered = false;
-let correctAnswers = 0;
-let wrongAnswers = 0;
-let streak = 0;
-let bestStreak = 0;
+// ADMIN PANEL - RANK 1 / 2 / 3
+// ========================================
 
 
-// ============================================================
-// RANK SYSTEM
-// ============================================================
-
-const RANKS = [
-    "Iron",
-    "Bronze",
-    "Silver",
-    "Gold",
-    "Platinum",
-    "Diamond",
-    "Ascendant",
-    "Immortal",
-    "Radiant"
-];
-
-const RANK_ICONS = {
-    Iron: "/Iron_1_Rank.webp",
-    Bronze: "/Bronze_1_Rank.webp",
-    Silver: "/Silver_1_Rank.webp",
-    Gold: "/Gold_1_Rank.webp",
-    Platinum: "/Platinum_1_Rank.webp",
-    Diamond: "/Diamond_1_Rank.webp",
-    Ascendant: "/Ascendant_1_Rank.webp",
-    Immortal: "/Immortal_1_Rank.webp",
-    Radiant: "/Radiant_Rank.webp"
-};
-
-
-// ============================================================
+// ========================================
 // LOGIN
-// ============================================================
+// ========================================
 
-function renderLogin() {
+document.body.innerHTML = `
 
-    document.body.innerHTML = `
-        <div class="login-screen">
+<div class="login-screen">
 
-            <div class="login-grid"></div>
+    <div class="login-grid"></div>
+    <div class="login-glow"></div>
 
-            <div class="login-glow"></div>
+    <div class="login-box">
 
-            <div class="login-box">
-
-                <div class="login-logo">
-                    V
-                </div>
-
-                <div class="login-small">
-                    NOXIN99
-                </div>
-
-                <h1>
-                    ADMIN PANEL
-                </h1>
-
-                <div class="login-line"></div>
-
-                <p class="login-subtitle">
-                    VALORANT CLIP QUIZ
-                </p>
-
-                <label for="adminPassword">
-                    ADMIN PASSWORD
-                </label>
-
-                <input
-                    id="adminPassword"
-                    type="password"
-                    placeholder="Enter password..."
-                    autocomplete="off"
-                >
-
-                <button
-                    class="login-button"
-                    id="loginButton"
-                    type="button"
-                >
-                    ENTER ADMIN PANEL
-                </button>
-
-                <div
-                    id="loginError"
-                    class="login-error"
-                ></div>
-
-                <div class="login-status">
-                    <span></span>
-                    SECURE ADMIN ACCESS
-                </div>
-
-            </div>
-
+        <div class="login-logo">
+            V
         </div>
-    `;
 
-    document
-        .getElementById("loginButton")
-        .addEventListener("click", adminLogin);
+        <div class="login-small">
+            NOXIN99
+        </div>
 
-    document
-        .getElementById("adminPassword")
-        .addEventListener("keydown", event => {
+        <h1>
+            ADMIN PANEL
+        </h1>
 
-            if (event.key === "Enter") {
-                adminLogin();
-            }
+        <div class="login-line"></div>
 
-        });
+        <p class="login-subtitle">
+            VALORANT CLIP QUIZ
+        </p>
 
-    document
-        .getElementById("adminPassword")
-        .focus();
-}
+        <label>
+            ADMIN PASSWORD
+        </label>
 
+        <input
+            id="adminPassword"
+            type="password"
+            placeholder="Enter password..."
+            autocomplete="off"
+        >
+
+        <button
+            id="loginButton"
+            type="button"
+        >
+            ENTER ADMIN PANEL
+        </button>
+
+        <div
+            id="loginError"
+            class="login-error"
+        ></div>
+
+        <div class="login-status">
+            <span></span>
+            SECURE ADMIN ACCESS
+        </div>
+
+    </div>
+
+</div>
+
+`;
+
+
+// ========================================
+// LOGIN FUNKTION
+// ========================================
 
 function adminLogin() {
 
     const input =
-        document.getElementById("adminPassword");
+        document.getElementById(
+            "adminPassword"
+        );
 
     const error =
-        document.getElementById("loginError");
+        document.getElementById(
+            "loginError"
+        );
 
     const box =
-        document.querySelector(".login-box");
+        document.querySelector(
+            ".login-box"
+        );
 
     if (!input || !error) {
         return;
     }
 
-    if (input.value === ADMIN_PASSWORD) {
+
+    if (input.value === "Noxin99") {
 
         startAdminPanel();
 
-        return;
+    } else {
+
+        error.textContent =
+            "❌ FALSCHES PASSWORT";
+
+        input.value = "";
+
+        input.focus();
+
+
+        if (box) {
+
+            box.classList.remove(
+                "login-wrong"
+            );
+
+            void box.offsetWidth;
+
+            box.classList.add(
+                "login-wrong"
+            );
+
+        }
+
     }
 
-    error.textContent =
-        "❌ FALSCHES PASSWORT";
-
-    input.value = "";
-
-    input.focus();
-
-    if (box) {
-
-        box.classList.remove("login-wrong");
-
-        void box.offsetWidth;
-
-        box.classList.add("login-wrong");
-    }
 }
 
 
-// ============================================================
+document
+    .getElementById("loginButton")
+    .addEventListener(
+        "click",
+        adminLogin
+    );
+
+
+document
+    .getElementById("adminPassword")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                adminLogin();
+
+            }
+
+        }
+    );
+
+
+// ========================================
+// QUIZ VARIABLEN
+// ========================================
+
+let allClips = [];
+
+let currentClip = 0;
+
+let score = 0;
+
+let total = 0;
+
+let answered = false;
+
+let selectedBaseRank = null;
+
+
+// ========================================
 // ADMIN PANEL
-// ============================================================
+// ========================================
 
 function startAdminPanel() {
 
@@ -186,7 +182,6 @@ function startAdminPanel() {
 
             <div class="valo-grid"></div>
 
-            <div class="scanlines"></div>
 
             <img
                 class="agent-bg waylay-bg"
@@ -194,17 +189,20 @@ function startAdminPanel() {
                 alt=""
             >
 
+
             <img
                 class="agent-bg raze-bg"
                 src="/Raze_Artwork_Full.webp"
                 alt=""
             >
 
+
             <img
                 class="agent-icon-bg"
                 src="/Waylay_icon.webp"
                 alt=""
             >
+
 
             <div class="agent-overlay"></div>
 
@@ -250,7 +248,7 @@ function startAdminPanel() {
                     <div>
 
                         <div class="small-title">
-                            CLIP ANALYSIS // LIVE
+                            CLIP ANALYSIS
                         </div>
 
                         <h1>
@@ -262,54 +260,15 @@ function startAdminPanel() {
                     </div>
 
 
-                    <div class="header-stats">
+                    <div class="score-box">
 
-                        <div class="stat-box">
+                        <span>
+                            SCORE
+                        </span>
 
-                            <div class="stat-label">
-                                SCORE
-                            </div>
-
-                            <strong
-                                class="stat-value"
-                                id="scoreDisplay"
-                            >
-                                0
-                            </strong>
-
-                        </div>
-
-
-                        <div class="stat-box">
-
-                            <div class="stat-label">
-                                ACCURACY
-                            </div>
-
-                            <strong
-                                class="stat-value"
-                                id="accuracyDisplay"
-                            >
-                                0%
-                            </strong>
-
-                        </div>
-
-
-                        <div class="stat-box">
-
-                            <div class="stat-label">
-                                STREAK
-                            </div>
-
-                            <strong
-                                class="stat-value"
-                                id="streakDisplay"
-                            >
-                                0
-                            </strong>
-
-                        </div>
+                        <strong id="scoreDisplay">
+                            0 / 0
+                        </strong>
 
                     </div>
 
@@ -321,191 +280,152 @@ function startAdminPanel() {
             </main>
 
         </div>
+
     `;
 
+
     loadClips();
+
 }
 
 
-// ============================================================
-// LOAD CLIPS
-// ============================================================
+// ========================================
+// CLIPS LADEN
+// ========================================
 
 async function loadClips() {
-
-    const clips =
-        document.getElementById("clips");
-
-    if (!clips) {
-        return;
-    }
-
-    clips.innerHTML = `
-        <div class="card">
-            <div class="question-box">
-                <div class="question-label">
-                    SYSTEM
-                </div>
-
-                <h3>
-                    CLIPS WERDEN GELADEN...
-                </h3>
-            </div>
-        </div>
-    `;
 
     try {
 
         const response =
             await fetch("/submissions");
 
+
         if (!response.ok) {
+
             throw new Error(
-                "HTTP " + response.status
+                "Clips konnten nicht geladen werden."
             );
+
         }
 
-        const data =
+
+        allClips =
             await response.json();
 
-        if (!Array.isArray(data)) {
-            throw new Error(
-                "Ungültige Clip-Daten."
-            );
-        }
-
-        allClips = data;
 
         currentClip = 0;
+
         score = 0;
-        correctAnswers = 0;
-        wrongAnswers = 0;
-        streak = 0;
-        bestStreak = 0;
 
-        total = allClips.length;
+        total =
+            allClips.length;
 
-        updateStats();
+        answered = false;
+
+        selectedBaseRank = null;
+
+
+        updateScore();
 
         showClip();
 
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        const clips =
+            document.getElementById(
+                "clips"
+            );
+
+
+        if (clips) {
+
+            clips.innerHTML = `
+
+                <div class="card error-card">
+
+                    <h2>
+                        ❌ FEHLER
+                    </h2>
+
+                    <p>
+                        Die Clips konnten nicht geladen werden.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
     }
 
-    catch (error) {
-
-        console.error(
-            "Clip loading error:",
-            error
-        );
-
-        clips.innerHTML = `
-
-            <div class="card error-card">
-
-                <h2>
-                    ❌ SYSTEM ERROR
-                </h2>
-
-                <p>
-                    Die Clips konnten nicht geladen werden.
-                </p>
-
-                <p>
-                    ${escapeHTML(error.message)}
-                </p>
-
-                <button
-                    onclick="loadClips()"
-                >
-                    🔄 ERNEUT VERSUCHEN
-                </button>
-
-            </div>
-        `;
-    }
 }
 
 
-// ============================================================
-// SHOW CLIP
-// ============================================================
+// ========================================
+// CLIP ANZEIGEN
+// ========================================
 
 function showClip() {
 
     const clips =
-        document.getElementById("clips");
+        document.getElementById(
+            "clips"
+        );
+
 
     if (!clips) {
         return;
     }
 
-    if (currentClip >= allClips.length) {
+
+    answered = false;
+
+    selectedBaseRank = null;
+
+
+    if (
+        currentClip >=
+        allClips.length
+    ) {
 
         showComplete();
 
         return;
+
     }
 
-    answered = false;
 
     const item =
         allClips[currentClip];
 
-    const progress =
-        total > 0
-            ? ((currentClip) / total) * 100
-            : 0;
-
-    const playerName =
-        escapeHTML(
-            item.riot_name || "UNKNOWN PLAYER"
-        );
-
-    const clipUrl =
-        escapeAttribute(
-            item.clip_url || ""
-        );
 
     clips.innerHTML = `
 
-        <div class="card clip-enter">
-
-            <div class="progress-area">
-
-                <div class="progress-info">
-
-                    <span>
-                        QUIZ PROGRESS
-                    </span>
-
-                    <span>
-                        ${currentClip} / ${total}
-                    </span>
-
-                </div>
-
-                <div class="progress-track">
-
-                    <div
-                        class="progress-fill"
-                        style="width:${progress}%"
-                    ></div>
-
-                </div>
-
-            </div>
+        <div class="card">
 
 
             <div class="clip-header">
 
                 <span class="clip-number">
-                    CLIP ${currentClip + 1}
+
+                    CLIP
+                    ${currentClip + 1}
                     /
-                    ${total}
+                    ${allClips.length}
+
                 </span>
 
+
                 <span class="clip-label">
+
                     NOXIN99 • GUESS THE RANK
+
                 </span>
 
             </div>
@@ -516,9 +436,8 @@ function showClip() {
                 <video
                     controls
                     preload="metadata"
-                    playsinline
-                    src="${clipUrl}"
-                ></video>
+                    src="${escapeHTML(item.clip_url)}">
+                </video>
 
             </div>
 
@@ -532,10 +451,11 @@ function showClip() {
                     </div>
 
                     <div class="player-name">
-                        ${playerName}
+                        ${escapeHTML(item.riot_name)}
                     </div>
 
                 </div>
+
 
                 <div class="clip-label">
                     ANALYZING CLIP
@@ -559,8 +479,58 @@ function showClip() {
 
             <div class="ranks">
 
-                ${createRankButtons()}
+                ${createRankButton(
+                    "Iron",
+                    "/Iron_1_Rank.webp"
+                )}
 
+                ${createRankButton(
+                    "Bronze",
+                    "/Bronze_1_Rank.webp"
+                )}
+
+                ${createRankButton(
+                    "Silver",
+                    "/Silver_1_Rank.webp"
+                )}
+
+                ${createRankButton(
+                    "Gold",
+                    "/Gold_1_Rank.webp"
+                )}
+
+                ${createRankButton(
+                    "Platinum",
+                    "/Platinum_1_Rank.webp"
+                )}
+
+                ${createRankButton(
+                    "Diamond",
+                    "/Diamond_1_Rank.webp"
+                )}
+
+                ${createRankButton(
+                    "Ascendant",
+                    "/Ascendant_1_Rank.webp"
+                )}
+
+                ${createRankButton(
+                    "Immortal",
+                    "/Immortal_1_Rank.webp"
+                )}
+
+                ${createRankButton(
+                    "Radiant",
+                    "/Radiant_Rank.webp",
+                    true
+                )}
+
+            </div>
+
+
+            <div
+                id="tierSelection"
+                class="tier-selection">
             </div>
 
 
@@ -579,394 +549,431 @@ function showClip() {
 
             </div>
 
+
         </div>
+
     `;
+
 }
 
 
-// ============================================================
-// CREATE RANK BUTTONS
-// ============================================================
+// ========================================
+// RANG BUTTON ERSTELLEN
+// ========================================
 
-function createRankButtons() {
+function createRankButton(
+    rank,
+    image,
+    direct = false
+) {
 
-    let html = "";
+    if (direct) {
 
-    for (const rank of RANKS) {
+        return `
 
-        const icon =
-            RANK_ICONS[rank];
+            <div
+                class="rank-choice"
+                onclick="selectRank('${rank}')"
+            >
 
-        /*
-         * Jeder Rang bekommt drei Stufen.
-         *
-         * Radiant und Immortal haben in VALORANT
-         * besondere Regeln. Für das Quiz behandeln
-         * wir sie trotzdem als 1 / 2 / 3 Auswahl,
-         * damit das UI einheitlich bleibt.
-         */
-
-        for (let tier = 1; tier <= 3; tier++) {
-
-            html += `
-
-                <div
-                    class="rank-choice"
-                    data-rank="${rank}"
-                    data-tier="${tier}"
-                    onclick="guess('${rank}', ${tier})"
+                <img
+                    class="rank-icon"
+                    src="${image}"
+                    alt="${rank}"
                 >
 
-                    <img
-                        class="rank-icon"
-                        src="${icon}"
-                        alt="${rank} ${tier}"
-                    >
-
-                    <div class="rank-name">
-                        ${rank} ${tier}
-                    </div>
-
+                <div class="rank-name">
+                    ${rank}
                 </div>
-            `;
-        }
+
+            </div>
+
+        `;
+
     }
 
-    return html;
+
+    return `
+
+        <div
+            class="rank-choice"
+            onclick="openTierSelection('${rank}')"
+        >
+
+            <img
+                class="rank-icon"
+                src="${image}"
+                alt="${rank}"
+            >
+
+            <div class="rank-name">
+                ${rank}
+            </div>
+
+        </div>
+
+    `;
+
 }
 
 
-// ============================================================
-// GUESS
-// ============================================================
+// ========================================
+// TIER AUSWAHL
+// ========================================
 
-function guess(selectedRank, selectedTier) {
+function openTierSelection(rank) {
 
     if (answered) {
         return;
     }
 
+
+    selectedBaseRank = rank;
+
+
+    const container =
+        document.getElementById(
+            "tierSelection"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    const image =
+        rankImages[rank];
+
+
+    container.innerHTML = `
+
+        <div class="tier-panel">
+
+            <div class="tier-title">
+
+                ${rank.toUpperCase()}
+                AUSWÄHLEN
+
+            </div>
+
+
+            <div class="tier-buttons">
+
+
+                <button
+                    class="tier-button"
+                    onclick="selectRank('${rank} 1')"
+                >
+
+                    <img
+                        src="${image}"
+                        alt="${rank} 1"
+                    >
+
+                    <span>
+                        ${rank} 1
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="tier-button"
+                    onclick="selectRank('${rank} 2')"
+                >
+
+                    <img
+                        src="${image}"
+                        alt="${rank} 2"
+                    >
+
+                    <span>
+                        ${rank} 2
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="tier-button"
+                    onclick="selectRank('${rank} 3')"
+                >
+
+                    <img
+                        src="${image}"
+                        alt="${rank} 3"
+                    >
+
+                    <span>
+                        ${rank} 3
+                    </span>
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    container.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+}
+
+
+// ========================================
+// RANG AUSWÄHLEN
+// ========================================
+
+function selectRank(selectedRank) {
+
+    if (answered) {
+        return;
+    }
+
+
     const item =
         allClips[currentClip];
+
 
     if (!item) {
         return;
     }
 
-    answered = true;
 
-    const real =
-        parseRank(
+    const realRank =
+        normalizeRank(
             item.rank
         );
 
-    const selected = {
-        rank: selectedRank,
-        tier: selectedTier
-    };
 
-    const isCorrect =
-        ranksMatch(real, selected);
-
-    const choices =
-        document.querySelectorAll(
-            ".rank-choice"
+    const selected =
+        normalizeRank(
+            selectedRank
         );
 
-    choices.forEach(choice => {
 
-        choice.style.pointerEvents =
-            "none";
-
-        const choiceRank =
-            choice.dataset.rank;
-
-        const choiceTier =
-            Number(choice.dataset.tier);
-
-        if (
-            choiceRank === selected.rank &&
-            choiceTier === selected.tier
-        ) {
-
-            choice.classList.add(
-                isCorrect
-                    ? "correct"
-                    : "wrong"
-            );
-
-        }
-
-        if (
-            real.rank === choiceRank &&
-            real.tier === choiceTier
-        ) {
-
-            choice.classList.add("correct");
-        }
-
-    });
-
-
-    if (isCorrect) {
-
-        score++;
-
-        correctAnswers++;
-
-        streak++;
-
-        if (streak > bestStreak) {
-            bestStreak = streak;
-        }
-
-    }
-
-    else {
-
-        wrongAnswers++;
-
-        streak = 0;
-    }
-
-
-    updateStats();
-
-
-    document
-        .querySelector(".valo-background")
-        ?.classList.add("result-flash");
-
-    setTimeout(() => {
-
-        document
-            .querySelector(".valo-background")
-            ?.classList.remove("result-flash");
-
-    }, 350);
-
-
-    showResult(
-        real,
-        selected,
-        isCorrect
+    guess(
+        realRank,
+        selected
     );
+
 }
 
 
-// ============================================================
-// PARSE RANK
-// ============================================================
+// ========================================
+// RANG NORMALISIEREN
+// ========================================
 
-function parseRank(value) {
-
-    if (value === undefined || value === null) {
-
-        return {
-            rank: "Unknown",
-            tier: null,
-            generic: true
-        };
-    }
-
-    let text =
-        String(value)
-            .trim()
-            .toLowerCase();
-
-    text =
-        text
-            .replace(/diamant/g, "diamond")
-            .replace(/platin/g, "platinum")
-            .replace(/aufsteigend/g, "ascendant")
-            .replace(/unsterblich/g, "immortal")
-            .replace(/strahlend/g, "radiant");
-
-    let rank =
-        RANKS.find(
-            r =>
-                text.startsWith(
-                    r.toLowerCase()
-                )
-        );
+function normalizeRank(rank) {
 
     if (!rank) {
-
-        return {
-            rank: String(value),
-            tier: null,
-            generic: true
-        };
+        return "";
     }
 
-    const tierMatch =
-        text.match(
-            /(?:^|\s)([123])(?:\s|$)/
-        );
 
-    const tier =
-        tierMatch
-            ? Number(tierMatch[1])
-            : null;
+    let value =
+        String(rank)
+            .trim()
+            .replace(
+                /Diamant/gi,
+                "Diamond"
+            )
+            .replace(
+                /Platin/gi,
+                "Platinum"
+            );
 
-    return {
-        rank,
-        tier,
-        generic: tier === null
-    };
+
+    value =
+        value
+            .replace(
+                /^Diamond\s*I$/i,
+                "Diamond 1"
+            )
+            .replace(
+                /^Diamond\s*II$/i,
+                "Diamond 2"
+            )
+            .replace(
+                /^Diamond\s*III$/i,
+                "Diamond 3"
+            )
+            .replace(
+                /^([A-Za-z]+)\s*I$/i,
+                "$1 1"
+            )
+            .replace(
+                /^([A-Za-z]+)\s*II$/i,
+                "$1 2"
+            )
+            .replace(
+                /^([A-Za-z]+)\s*III$/i,
+                "$1 3"
+            );
+
+
+    return value;
+
 }
 
 
-// ============================================================
-// RANK MATCH
-// ============================================================
+// ========================================
+// RANG RATEN
+// ========================================
 
-function ranksMatch(real, selected) {
-
-    if (
-        real.rank === "Unknown"
-    ) {
-        return false;
-    }
-
-    if (
-        real.rank !== selected.rank
-    ) {
-        return false;
-    }
-
-    /*
-     * Falls dein Upload-System momentan nur
-     * "Diamond" statt "Diamond 1" speichert,
-     * wird jede Diamond-Stufe als Diamond gewertet.
-     *
-     * Sobald "Diamond 1/2/3" gespeichert wird,
-     * wird exakt verglichen.
-     */
-
-    if (real.generic) {
-        return true;
-    }
-
-    return real.tier === selected.tier;
-}
-
-
-// ============================================================
-// RESULT
-// ============================================================
-
-function showResult(
-    real,
-    selected,
-    isCorrect
+function guess(
+    realRank,
+    selectedRank
 ) {
 
+    if (answered) {
+        return;
+    }
+
+
+    answered = true;
+
+
+    realRank =
+        normalizeRank(
+            realRank
+        );
+
+
+    selectedRank =
+        normalizeRank(
+            selectedRank
+        );
+
+
     const result =
-        document.getElementById("result");
+        document.getElementById(
+            "result"
+        );
+
 
     if (!result) {
         return;
     }
 
+
+    const correct =
+        realRank === selectedRank;
+
+
+    const baseRank =
+        getBaseRank(
+            realRank
+        );
+
+
     const image =
-        RANK_ICONS[real.rank];
-
-    const realText =
-        real.tier
-            ? `${real.rank} ${real.tier}`
-            : real.rank;
-
-    const selectedText =
-        `${selected.rank} ${selected.tier}`;
+        rankImages[baseRank] ||
+        rankImages[realRank];
 
 
-    if (isCorrect) {
+    if (correct) {
+
+        score++;
+
 
         result.innerHTML = `
 
-            <div class="result-box correct-result">
+            <div
+                class="result-box correct-result"
+            >
 
                 <h2 class="result-title">
+
                     ✅ RICHTIG!
+
                 </h2>
 
+
                 <img
-                    src="${image || ""}"
-                    alt="${escapeAttribute(realText)}"
+                    src="${image}"
+                    alt="${realRank}"
                 >
 
+
                 <p class="result-text">
 
-                    Dein Tipp:
+                    Der echte Rang ist:
 
                     <strong>
-                        ${escapeHTML(selectedText)}
+                        ${realRank}
                     </strong>
 
                 </p>
 
-                <p class="result-text">
-
-                    Echter Rang:
-
-                    <strong>
-                        ${escapeHTML(realText)}
-                    </strong>
-
-                </p>
 
                 <div class="result-points">
+
                     +1 PUNKT
+
                 </div>
 
             </div>
+
         `;
 
-    }
-
-    else {
+    } else {
 
         result.innerHTML = `
 
-            <div class="result-box">
+            <div
+                class="result-box wrong-result"
+            >
 
                 <h2 class="result-title">
+
                     ❌ FALSCH!
+
                 </h2>
+
 
                 <p class="result-text">
 
                     Dein Tipp:
 
                     <strong>
-                        ${escapeHTML(selectedText)}
+                        ${selectedRank}
                     </strong>
 
                 </p>
 
+
                 <img
-                    src="${image || ""}"
-                    alt="${escapeAttribute(realText)}"
+                    src="${image}"
+                    alt="${realRank}"
                 >
+
 
                 <p class="result-text">
 
                     Echter Rang:
 
                     <strong>
-                        ${escapeHTML(realText)}
+                        ${realRank}
                     </strong>
 
                 </p>
 
-                <div class="result-points">
-                    +0 PUNKTE
-                </div>
-
             </div>
+
         `;
+
     }
+
+
+    updateScore();
 
 
     const nextButton =
@@ -974,72 +981,109 @@ function showResult(
             "nextButton"
         );
 
+
     if (nextButton) {
 
         nextButton.style.display =
             "inline-block";
 
     }
+
+
+    disableChoices();
+
 }
 
 
-// ============================================================
-// STATS
-// ============================================================
+// ========================================
+// BASIS-RANG ERMITTELN
+// ========================================
 
-function updateStats() {
+function getBaseRank(rank) {
 
-    const scoreDisplay =
+    return String(rank)
+        .replace(
+            /\s[123]$/,
+            ""
+        );
+
+}
+
+
+// ========================================
+// AUSWAHL SPERREN
+// ========================================
+
+function disableChoices() {
+
+    const choices =
+        document.querySelectorAll(
+            ".rank-choice"
+        );
+
+
+    choices.forEach(
+        choice => {
+
+            choice.style.pointerEvents =
+                "none";
+
+            choice.style.opacity =
+                "0.35";
+
+        }
+    );
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".tier-button"
+        );
+
+
+    buttons.forEach(
+        button => {
+
+            button.disabled = true;
+
+            button.style.pointerEvents =
+                "none";
+
+            button.style.opacity =
+                "0.35";
+
+        }
+    );
+
+}
+
+
+// ========================================
+// SCORE
+// ========================================
+
+function updateScore() {
+
+    const display =
         document.getElementById(
             "scoreDisplay"
         );
 
-    const accuracyDisplay =
-        document.getElementById(
-            "accuracyDisplay"
-        );
 
-    const streakDisplay =
-        document.getElementById(
-            "streakDisplay"
-        );
-
-    const answeredCount =
-        correctAnswers +
-        wrongAnswers;
-
-    const accuracy =
-        answeredCount > 0
-            ? Math.round(
-                (correctAnswers /
-                answeredCount) *
-                100
-            )
-            : 0;
-
-    if (scoreDisplay) {
-
-        scoreDisplay.textContent =
-            `${score} / ${total}`;
+    if (!display) {
+        return;
     }
 
-    if (accuracyDisplay) {
 
-        accuracyDisplay.textContent =
-            `${accuracy}%`;
-    }
+    display.textContent =
+        `${score} / ${total}`;
 
-    if (streakDisplay) {
-
-        streakDisplay.textContent =
-            streak;
-    }
 }
 
 
-// ============================================================
-// NEXT CLIP
-// ============================================================
+// ========================================
+// NÄCHSTER CLIP
+// ========================================
 
 function nextClip() {
 
@@ -1047,45 +1091,45 @@ function nextClip() {
         return;
     }
 
+
     currentClip++;
 
+
     showClip();
+
 }
 
 
-// ============================================================
-// COMPLETE SCREEN
-// ============================================================
+// ========================================
+// QUIZ ENDE
+// ========================================
 
 function showComplete() {
 
     const clips =
-        document.getElementById("clips");
+        document.getElementById(
+            "clips"
+        );
+
 
     if (!clips) {
         return;
     }
 
-    const accuracy =
+
+    const percentage =
         total > 0
             ? Math.round(
-                (correctAnswers /
-                total) *
-                100
+                (score / total) * 100
             )
             : 0;
-
-    const title =
-        getFinalTitle(
-            accuracy
-        );
 
 
     clips.innerHTML = `
 
-        <div class="card complete-card clip-enter">
+        <div class="card complete-card">
 
-            <div class="complete-trophy">
+            <div class="trophy">
                 🏆
             </div>
 
@@ -1094,12 +1138,8 @@ function showComplete() {
             </div>
 
             <h1>
-                ALLE CLIPS GESPIELT
+                ALLE CLIPS GESPIELT!
             </h1>
-
-            <div class="complete-rank">
-                ${title}
-            </div>
 
             <div class="complete-score">
 
@@ -1109,61 +1149,9 @@ function showComplete() {
                     ${score} / ${total}
                 </strong>
 
-            </div>
+                <br>
 
-
-            <div class="complete-stats">
-
-                <div class="complete-stat">
-
-                    <span>
-                        ACCURACY
-                    </span>
-
-                    <strong>
-                        ${accuracy}%
-                    </strong>
-
-                </div>
-
-
-                <div class="complete-stat">
-
-                    <span>
-                        RICHTIG
-                    </span>
-
-                    <strong>
-                        ${correctAnswers}
-                    </strong>
-
-                </div>
-
-
-                <div class="complete-stat">
-
-                    <span>
-                        FALSCH
-                    </span>
-
-                    <strong>
-                        ${wrongAnswers}
-                    </strong>
-
-                </div>
-
-
-                <div class="complete-stat">
-
-                    <span>
-                        BEST STREAK
-                    </span>
-
-                    <strong>
-                        ${bestStreak}
-                    </strong>
-
-                </div>
+                ${percentage}% ACCURACY
 
             </div>
 
@@ -1175,55 +1163,15 @@ function showComplete() {
             </button>
 
         </div>
+
     `;
+
 }
 
 
-// ============================================================
-// FINAL TITLE
-// ============================================================
-
-function getFinalTitle(accuracy) {
-
-    if (accuracy >= 95) {
-        return "🔥 RADIANT GUESSER";
-    }
-
-    if (accuracy >= 90) {
-        return "💎 IMMORTAL GUESSER";
-    }
-
-    if (accuracy >= 80) {
-        return "🌿 ASCENDANT GUESSER";
-    }
-
-    if (accuracy >= 70) {
-        return "💠 DIAMOND GUESSER";
-    }
-
-    if (accuracy >= 60) {
-        return "🏆 PLATINUM GUESSER";
-    }
-
-    if (accuracy >= 50) {
-        return "🥇 GOLD GUESSER";
-    }
-
-    if (accuracy >= 40) {
-        return "🥈 SILVER GUESSER";
-    }
-
-    if (accuracy >= 25) {
-        return "🥉 BRONZE GUESSER";
-    }
-
-    return "⚙️ IRON GUESSER";
-}
-
-
-// ============================================================
-// RESTART
-// ============================================================
+// ========================================
+// NEUSTART
+// ========================================
 
 function restartQuiz() {
 
@@ -1231,45 +1179,90 @@ function restartQuiz() {
 
     score = 0;
 
-    correctAnswers = 0;
-
-    wrongAnswers = 0;
-
-    streak = 0;
-
-    bestStreak = 0;
-
     answered = false;
 
-    updateStats();
+    selectedBaseRank = null;
+
+
+    updateScore();
 
     showClip();
+
 }
 
 
-// ============================================================
-// HTML SAFETY
-// ============================================================
+// ========================================
+// HTML SICHER MACHEN
+// ========================================
 
 function escapeHTML(value) {
 
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
     return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
 }
 
 
-function escapeAttribute(value) {
+// ========================================
+// RANG-BILDER
+// ========================================
 
-    return escapeHTML(value);
-}
+const rankImages = {
 
+    "Iron":
+        "/Iron_1_Rank.webp",
 
-// ============================================================
-// START
-// ============================================================
+    "Bronze":
+        "/Bronze_1_Rank.webp",
 
-renderLogin();
+    "Silver":
+        "/Silver_1_Rank.webp",
+
+    "Gold":
+        "/Gold_1_Rank.webp",
+
+    "Platinum":
+        "/Platinum_1_Rank.webp",
+
+    "Diamond":
+        "/Diamond_1_Rank.webp",
+
+    "Ascendant":
+        "/Ascendant_1_Rank.webp",
+
+    "Immortal":
+        "/Immortal_1_Rank.webp",
+
+    "Radiant":
+        "/Radiant_Rank.webp"
+
+};
