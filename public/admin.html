@@ -1,33 +1,203 @@
+```html
 <!DOCTYPE html>
 <html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guess The Rank Admin</title>
 
-<link rel="stylesheet" href="style.css">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Guess The Rank | Admin</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
+
 <body>
 
-<div class="card">
+    <div class="valo-page">
 
-    <h1>🎯 Guess The Rank Admin</h1>
 
-    <div id="score">
-        🏆 Punkte: 0 / 0
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <header class="topbar">
+
+            <div class="brand">
+
+                <div class="valorant-v">
+                    V
+                </div>
+
+                <div>
+
+                    <div class="brand-title">
+                        GUESS THE RANK
+                    </div>
+
+                    <div class="brand-subtitle">
+                        NOXIN99 ADMIN PANEL
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-status">
+
+                <span class="status-dot"></span>
+
+                ADMIN ONLINE
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =========================
+             MAIN
+        ========================== -->
+
+        <main class="main-container">
+
+
+            <!-- HEADER -->
+
+            <section class="dashboard-header">
+
+                <div>
+
+                    <div class="section-label">
+                        CLIP ANALYSIS
+                    </div>
+
+                    <h1>
+                        Guess The Rank
+                    </h1>
+
+                    <p>
+                        Analysiere die Clips und errate den Rang.
+                    </p>
+
+                </div>
+
+
+                <div class="score-panel">
+
+                    <span>
+                        SCORE
+                    </span>
+
+                    <strong id="score">
+                        🏆 Punkte: 0 / 0
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================
+                 CONTROL PANEL
+            ========================== -->
+
+            <section class="control-panel">
+
+                <div class="panel-title">
+
+                    <span class="red-line"></span>
+
+                    CLIP DATABASE
+
+                </div>
+
+
+                <button onclick="loadClips()">
+
+                    ▶ CLIPS LADEN
+
+                </button>
+
+            </section>
+
+
+
+            <!-- =========================
+                 CLIPS
+            ========================== -->
+
+            <section id="clips">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        🎬
+                    </div>
+
+                    <h2>
+                        Keine Clips geladen
+                    </h2>
+
+                    <p>
+                        Klicke auf „Clips laden“, um zu beginnen.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================
+                 RESULT
+            ========================== -->
+
+            <section id="result"></section>
+
+
+        </main>
+
+
+
+        <!-- =========================
+             FOOTER
+        ========================== -->
+
+        <footer>
+
+            <span>
+                NOXIN99
+            </span>
+
+            <span>
+                GUESS THE RANK
+            </span>
+
+            <span>
+                ADMIN PANEL
+            </span>
+
+        </footer>
+
+
     </div>
 
-    <button onclick="loadClips()">
-        Clips laden
-    </button>
 
-    <div id="clips"></div>
-
-    <div id="result"></div>
-
-</div>
-
-<script src="admin.js"></script>
+    <script src="admin.js"></script>
 
 </body>
+
 </html>
+```
