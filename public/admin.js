@@ -5,7 +5,7 @@
 
 
 // ========================================
-// LOGIN SCREEN
+// LOGIN
 // ========================================
 
 document.body.innerHTML = `
@@ -72,7 +72,7 @@ document.body.innerHTML = `
 
 
 // ========================================
-// LOGIN + ADMIN CSS
+// CSS
 // ========================================
 
 const style = document.createElement("style");
@@ -97,9 +97,16 @@ body {
 
 body {
     min-height: 100vh;
-    font-family: 'Rajdhani', Arial, sans-serif;
+
+    font-family:
+        'Rajdhani',
+        Arial,
+        sans-serif;
+
     background: #08090d;
+
     color: white;
+
     overflow-x: hidden;
 }
 
@@ -109,19 +116,23 @@ body {
 ======================================== */
 
 .login-screen {
+
     min-height: 100vh;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     position: relative;
+
     overflow: hidden;
 
     background:
         radial-gradient(
             circle at 50% 50%,
-            rgba(255,70,85,0.13),
+            rgba(255,70,85,0.14),
             transparent 35%
         ),
         linear-gradient(
@@ -134,6 +145,7 @@ body {
 
 
 .login-screen::before {
+
     content: "";
 
     position: absolute;
@@ -152,6 +164,7 @@ body {
 
 
 .login-grid {
+
     position: absolute;
 
     inset: 0;
@@ -174,6 +187,7 @@ body {
 
 
 .login-glow {
+
     position: absolute;
 
     width: 500px;
@@ -189,11 +203,15 @@ body {
 
 
 .login-box {
-    width: min(440px, calc(100% - 35px));
 
-    padding: 45px 42px;
+    width:
+        min(440px, calc(100% - 35px));
+
+    padding:
+        45px 42px;
 
     position: relative;
+
     z-index: 2;
 
     text-align: center;
@@ -215,6 +233,7 @@ body {
 
 
 .login-box::before {
+
     content: "";
 
     position: absolute;
@@ -233,6 +252,7 @@ body {
 
 
 .login-box::after {
+
     content: "";
 
     position: absolute;
@@ -252,6 +272,7 @@ body {
 
 
 .login-logo {
+
     width: 65px;
     height: 65px;
 
@@ -259,12 +280,14 @@ body {
         0 auto 14px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     background: #ff4655;
 
     font-size: 34px;
+
     font-weight: 700;
 
     clip-path:
@@ -281,9 +304,11 @@ body {
 
 
 .login-small {
+
     color: #ff4655;
 
     font-size: 12px;
+
     font-weight: 700;
 
     letter-spacing: 5px;
@@ -291,7 +316,9 @@ body {
 
 
 .login-box h1 {
-    margin: 5px 0 0;
+
+    margin:
+        5px 0 0;
 
     font-size: 36px;
 
@@ -302,10 +329,12 @@ body {
 
 
 .login-line {
+
     width: 70px;
     height: 3px;
 
-    margin: 14px auto;
+    margin:
+        14px auto;
 
     background: #ff4655;
 
@@ -315,6 +344,7 @@ body {
 
 
 .login-subtitle {
+
     margin:
         0 0 35px;
 
@@ -327,6 +357,7 @@ body {
 
 
 .login-box label {
+
     display: block;
 
     margin-bottom: 8px;
@@ -344,7 +375,9 @@ body {
 
 
 #adminPassword {
+
     width: 100%;
+
     height: 52px;
 
     padding:
@@ -373,6 +406,7 @@ body {
 
 
 #adminPassword:focus {
+
     border-color: #ff4655;
 
     box-shadow:
@@ -386,7 +420,9 @@ body {
 
 
 .login-box button {
+
     width: 100%;
+
     height: 52px;
 
     margin-top: 18px;
@@ -426,6 +462,7 @@ body {
 
 
 .login-box button:hover {
+
     transform:
         translateY(-2px);
 
@@ -436,6 +473,7 @@ body {
 
 
 .login-error {
+
     min-height: 22px;
 
     margin-top: 14px;
@@ -451,6 +489,7 @@ body {
 
 
 .login-status {
+
     margin-top: 25px;
 
     color: #555a64;
@@ -462,6 +501,7 @@ body {
 
 
 .login-status span {
+
     display: inline-block;
 
     width: 6px;
@@ -479,6 +519,7 @@ body {
 
 
 .login-wrong {
+
     animation:
         loginShake 0.25s ease;
 }
@@ -514,6 +555,7 @@ body {
 ======================================== */
 
 .valo-background {
+
     min-height: 100vh;
 
     position: relative;
@@ -536,6 +578,7 @@ body {
 
 
 .valo-background::before {
+
     content: "";
 
     position: fixed;
@@ -556,6 +599,7 @@ body {
 
 
 .valo-background::after {
+
     content: "";
 
     position: fixed;
@@ -577,6 +621,7 @@ body {
 
 
 .valo-grid {
+
     position: fixed;
 
     inset: 0;
@@ -601,10 +646,130 @@ body {
 
 
 /* ========================================
+   AGENTS
+======================================== */
+
+.agent-bg {
+
+    position: fixed;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    object-fit: contain;
+
+    opacity: 0.42;
+
+    filter:
+        saturate(0.8)
+        brightness(0.65)
+        contrast(1.08)
+        drop-shadow(
+            0 0 35px
+            rgba(255,70,85,0.12)
+        );
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+}
+
+
+/* WAYLAY */
+
+.waylay-bg {
+
+    left: -125px;
+
+    bottom: -90px;
+
+    width: 560px;
+
+    max-height: 82vh;
+
+    object-position:
+        bottom left;
+}
+
+
+/* RAZE */
+
+.raze-bg {
+
+    right: -135px;
+
+    bottom: -80px;
+
+    width: 570px;
+
+    max-height: 82vh;
+
+    object-position:
+        bottom right;
+}
+
+
+/* WAYLAY ICON */
+
+.agent-icon-bg {
+
+    position: fixed;
+
+    right: 38px;
+
+    top: 112px;
+
+    width: 72px;
+    height: 72px;
+
+    object-fit: contain;
+
+    opacity: 0.16;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(255,70,85,0.4)
+        );
+}
+
+
+/* DARK OVERLAY */
+
+.agent-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8,9,13,0.12),
+            rgba(8,9,13,0.70) 25%,
+            rgba(8,9,13,0.70) 75%,
+            rgba(8,9,13,0.12)
+        );
+}
+
+
+/* ========================================
    TOPBAR
 ======================================== */
 
 .topbar {
+
     height: 88px;
 
     display: flex;
@@ -632,6 +797,7 @@ body {
 
 
 .logo {
+
     display: flex;
 
     align-items: center;
@@ -641,13 +807,13 @@ body {
 
 
 .logo-mark {
+
     width: 48px;
     height: 48px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     background: #ff4655;
@@ -672,6 +838,7 @@ body {
 
 
 .logo-title {
+
     font-size: 22px;
 
     font-weight: 700;
@@ -681,6 +848,7 @@ body {
 
 
 .logo-subtitle {
+
     font-size: 11px;
 
     letter-spacing: 3px;
@@ -690,6 +858,7 @@ body {
 
 
 .admin-badge {
+
     font-size: 13px;
 
     letter-spacing: 2px;
@@ -708,6 +877,7 @@ body {
 
 
 .status-dot {
+
     display: inline-block;
 
     width: 7px;
@@ -746,6 +916,7 @@ body {
 ======================================== */
 
 .main {
+
     width:
         min(1250px, calc(100% - 40px));
 
@@ -757,11 +928,12 @@ body {
 
     position: relative;
 
-    z-index: 2;
+    z-index: 5;
 }
 
 
 .quiz-header {
+
     display: flex;
 
     justify-content: space-between;
@@ -775,6 +947,7 @@ body {
 
 
 .small-title {
+
     color: #ff4655;
 
     font-size: 13px;
@@ -786,6 +959,7 @@ body {
 
 
 .quiz-header h1 {
+
     margin:
         7px 0 0;
 
@@ -801,6 +975,7 @@ body {
 
 
 .header-line {
+
     width: 100px;
 
     height: 3px;
@@ -815,6 +990,7 @@ body {
 
 
 .score-box {
+
     min-width: 155px;
 
     padding:
@@ -831,6 +1007,7 @@ body {
 
 
 .score-box span {
+
     display: block;
 
     color: #777d88;
@@ -842,6 +1019,7 @@ body {
 
 
 .score-box strong {
+
     display: block;
 
     margin-top: 2px;
@@ -855,6 +1033,7 @@ body {
 ======================================== */
 
 .card {
+
     position: relative;
 
     background:
@@ -877,6 +1056,7 @@ body {
 
 
 .card::before {
+
     content: "";
 
     position: absolute;
@@ -895,6 +1075,7 @@ body {
 
 
 .card::after {
+
     content: "";
 
     position: absolute;
@@ -913,7 +1094,12 @@ body {
 }
 
 
+/* ========================================
+   CLIP HEADER
+======================================== */
+
 .clip-header {
+
     display: flex;
 
     justify-content: space-between;
@@ -930,6 +1116,7 @@ body {
 
 
 .clip-number {
+
     color: #ff4655;
 
     font-size: 15px;
@@ -941,6 +1128,7 @@ body {
 
 
 .clip-label {
+
     color: #777d88;
 
     font-size: 12px;
@@ -954,6 +1142,7 @@ body {
 ======================================== */
 
 .video-wrapper {
+
     position: relative;
 
     width: 100%;
@@ -969,6 +1158,7 @@ body {
 
 
 .card video {
+
     display: block;
 
     width: 100% !important;
@@ -990,6 +1180,7 @@ body {
 ======================================== */
 
 .player-info {
+
     display: flex;
 
     align-items: center;
@@ -1010,6 +1201,7 @@ body {
 
 
 .player-label {
+
     color: #777d88;
 
     font-size: 11px;
@@ -1019,6 +1211,7 @@ body {
 
 
 .player-name {
+
     color: white;
 
     font-size: 20px;
@@ -1034,6 +1227,7 @@ body {
 ======================================== */
 
 .question-box {
+
     margin-top: 28px;
 
     padding:
@@ -1050,6 +1244,7 @@ body {
 
 
 .question-label {
+
     color: #ff4655;
 
     font-size: 12px;
@@ -1063,6 +1258,7 @@ body {
 
 
 .card h3 {
+
     margin: 0;
 
     text-transform: uppercase;
@@ -1078,6 +1274,7 @@ body {
 ======================================== */
 
 .ranks {
+
     display: grid;
 
     grid-template-columns:
@@ -1090,6 +1287,7 @@ body {
 
 
 .rank-choice {
+
     position: relative;
 
     display: flex;
@@ -1125,6 +1323,7 @@ body {
 
 
 .rank-choice:hover {
+
     transform:
         translateY(-7px);
 
@@ -1140,6 +1339,7 @@ body {
 
 
 .rank-icon {
+
     width: 78px;
     height: 78px;
 
@@ -1152,6 +1352,7 @@ body {
 
 
 .rank-choice:hover .rank-icon {
+
     transform:
         scale(1.10);
 
@@ -1164,6 +1365,7 @@ body {
 
 
 .rank-name {
+
     margin-top: 4px;
 
     color: #8d929d;
@@ -1183,11 +1385,13 @@ body {
 ======================================== */
 
 #result {
+
     margin-top: 25px;
 }
 
 
 .result-box {
+
     padding:
         25px;
 
@@ -1208,6 +1412,7 @@ body {
 
 
 .result-title {
+
     margin:
         0 0 10px;
 
@@ -1220,6 +1425,7 @@ body {
 
 
 .result-box img {
+
     width: 140px;
 
     height: 140px;
@@ -1235,6 +1441,7 @@ body {
 
 
 .result-text {
+
     margin:
         8px 0 0;
 
@@ -1245,6 +1452,7 @@ body {
 
 
 .result-text strong {
+
     color: white;
 }
 
@@ -1252,6 +1460,7 @@ body {
 @keyframes resultIn {
 
     from {
+
         opacity: 0;
 
         transform:
@@ -1259,6 +1468,7 @@ body {
     }
 
     to {
+
         opacity: 1;
 
         transform:
@@ -1273,6 +1483,7 @@ body {
 ======================================== */
 
 button {
+
     position: relative;
 
     border: none;
@@ -1314,6 +1525,7 @@ button {
 
 
 button:hover {
+
     transform:
         translateY(-2px);
 
@@ -1324,12 +1536,14 @@ button:hover {
 
 
 button:active {
+
     transform:
         translateY(0);
 }
 
 
 .next-button-wrapper {
+
     display: flex;
 
     justify-content: flex-end;
@@ -1339,10 +1553,11 @@ button:active {
 
 
 /* ========================================
-   END SCREEN
+   COMPLETE
 ======================================== */
 
 .complete-card {
+
     text-align: center;
 
     padding:
@@ -1351,6 +1566,7 @@ button:active {
 
 
 .complete-card .trophy {
+
     font-size: 65px;
 
     margin-bottom: 15px;
@@ -1358,6 +1574,7 @@ button:active {
 
 
 .complete-card h1 {
+
     margin:
         5px 0;
 
@@ -1370,6 +1587,7 @@ button:active {
 
 
 .complete-score {
+
     margin:
         20px 0 30px;
 
@@ -1380,6 +1598,7 @@ button:active {
 
 
 .complete-score strong {
+
     color: #ff4655;
 
     font-size: 35px;
@@ -1387,6 +1606,7 @@ button:active {
 
 
 .error-card {
+
     text-align: center;
 
     padding:
@@ -1395,6 +1615,7 @@ button:active {
 
 
 .error-card h2 {
+
     color: #ff4655;
 
     font-size: 30px;
@@ -1408,8 +1629,29 @@ button:active {
 @media (max-width: 1000px) {
 
     .ranks {
+
         grid-template-columns:
             repeat(5, 1fr);
+    }
+
+
+    .waylay-bg {
+
+        left: -190px;
+
+        opacity: 0.25;
+
+        width: 480px;
+    }
+
+
+    .raze-bg {
+
+        right: -190px;
+
+        opacity: 0.25;
+
+        width: 490px;
     }
 
 }
@@ -1418,12 +1660,14 @@ button:active {
 @media (max-width: 700px) {
 
     .topbar {
+
         padding:
             0 20px;
     }
 
 
     .main {
+
         width:
             calc(100% - 20px);
 
@@ -1433,6 +1677,7 @@ button:active {
 
 
     .quiz-header {
+
         align-items:
             flex-start;
 
@@ -1442,26 +1687,43 @@ button:active {
 
 
     .score-box {
+
         text-align:
             left;
     }
 
 
     .card {
+
         padding:
             18px;
     }
 
 
     .card video {
+
         min-height:
             220px;
     }
 
 
     .ranks {
+
         grid-template-columns:
             repeat(3, 1fr);
+    }
+
+
+    .waylay-bg,
+    .raze-bg {
+
+        opacity: 0.12;
+    }
+
+
+    .agent-icon-bg {
+
+        display: none;
     }
 
 }
@@ -1470,12 +1732,14 @@ button:active {
 @media (max-width: 450px) {
 
     .logo-subtitle {
+
         display:
             none;
     }
 
 
     .admin-badge {
+
         font-size:
             9px;
 
@@ -1485,24 +1749,28 @@ button:active {
 
 
     .logo-title {
+
         font-size:
             18px;
     }
 
 
     .ranks {
+
         grid-template-columns:
             repeat(3, 1fr);
     }
 
 
     .rank-choice {
+
         min-height:
             100px;
     }
 
 
     .rank-icon {
+
         width:
             62px;
 
@@ -1524,13 +1792,19 @@ document.head.appendChild(style);
 function adminLogin() {
 
     const input =
-        document.getElementById("adminPassword");
+        document.getElementById(
+            "adminPassword"
+        );
 
     const error =
-        document.getElementById("loginError");
+        document.getElementById(
+            "loginError"
+        );
 
     const box =
-        document.querySelector(".login-box");
+        document.querySelector(
+            ".login-box"
+        );
 
 
     if (!input || !error) {
@@ -1608,6 +1882,31 @@ function startAdminPanel() {
         <div class="valo-background">
 
             <div class="valo-grid"></div>
+
+
+            <img
+                class="agent-bg waylay-bg"
+                src="/Waylay_Artwork_Full.webp"
+                alt=""
+            >
+
+
+            <img
+                class="agent-bg raze-bg"
+                src="/Raze_Artwork_Full.webp"
+                alt=""
+            >
+
+
+            <img
+                class="agent-icon-bg"
+                src="/Waylay_icon.webp"
+                alt=""
+            >
+
+
+            <div class="agent-overlay"></div>
+
 
             <header class="topbar">
 
@@ -1692,7 +1991,7 @@ function startAdminPanel() {
 
 
 // ========================================
-// QUIZ VARIABLES
+// QUIZ
 // ========================================
 
 let allClips = [];
@@ -1749,7 +2048,9 @@ async function loadClips() {
 
 
         const clips =
-            document.getElementById("clips");
+            document.getElementById(
+                "clips"
+            );
 
 
         if (clips) {
@@ -1784,7 +2085,9 @@ async function loadClips() {
 function showClip() {
 
     const clips =
-        document.getElementById("clips");
+        document.getElementById(
+            "clips"
+        );
 
 
     if (!clips) {
@@ -1820,7 +2123,9 @@ function showClip() {
 
                 </div>
 
-                <button onclick="restartQuiz()">
+                <button
+                    onclick="restartQuiz()"
+                >
                     🔄 NOCHMAL SPIELEN
                 </button>
 
@@ -1918,6 +2223,7 @@ function showClip() {
                     <img
                         class="rank-icon"
                         src="/Iron_1_Rank.webp"
+                        alt="Iron"
                     >
 
                     <div class="rank-name">
@@ -1935,6 +2241,7 @@ function showClip() {
                     <img
                         class="rank-icon"
                         src="/Bronze_1_Rank.webp"
+                        alt="Bronze"
                     >
 
                     <div class="rank-name">
@@ -1952,6 +2259,7 @@ function showClip() {
                     <img
                         class="rank-icon"
                         src="/Silver_1_Rank.webp"
+                        alt="Silver"
                     >
 
                     <div class="rank-name">
@@ -1969,6 +2277,7 @@ function showClip() {
                     <img
                         class="rank-icon"
                         src="/Gold_1_Rank.webp"
+                        alt="Gold"
                     >
 
                     <div class="rank-name">
@@ -1986,6 +2295,7 @@ function showClip() {
                     <img
                         class="rank-icon"
                         src="/Platinum_1_Rank.webp"
+                        alt="Platinum"
                     >
 
                     <div class="rank-name">
@@ -2003,6 +2313,7 @@ function showClip() {
                     <img
                         class="rank-icon"
                         src="/Diamond_1_Rank.webp"
+                        alt="Diamond"
                     >
 
                     <div class="rank-name">
@@ -2020,6 +2331,7 @@ function showClip() {
                     <img
                         class="rank-icon"
                         src="/Ascendant_1_Rank.webp"
+                        alt="Ascendant"
                     >
 
                     <div class="rank-name">
@@ -2037,6 +2349,7 @@ function showClip() {
                     <img
                         class="rank-icon"
                         src="/Immortal_1_Rank.webp"
+                        alt="Immortal"
                     >
 
                     <div class="rank-name">
@@ -2054,6 +2367,7 @@ function showClip() {
                     <img
                         class="rank-icon"
                         src="/Radiant_Rank.webp"
+                        alt="Radiant"
                     >
 
                     <div class="rank-name">
@@ -2097,12 +2411,20 @@ function guess(realRank, selectedRank) {
 
     realRank =
         realRank
-            .replace("Diamant", "Diamond")
-            .replace("Platin", "Platinum");
+            .replace(
+                "Diamant",
+                "Diamond"
+            )
+            .replace(
+                "Platin",
+                "Platinum"
+            );
 
 
     const result =
-        document.getElementById("result");
+        document.getElementById(
+            "result"
+        );
 
 
     if (!result) {
@@ -2194,7 +2516,9 @@ function guess(realRank, selectedRank) {
 
 
     const nextButton =
-        document.getElementById("nextButton");
+        document.getElementById(
+            "nextButton"
+        );
 
 
     if (nextButton) {
@@ -2206,7 +2530,9 @@ function guess(realRank, selectedRank) {
 
 
     const rankIcons =
-        document.querySelectorAll(".rank-choice");
+        document.querySelectorAll(
+            ".rank-choice"
+        );
 
 
     rankIcons.forEach(choice => {
