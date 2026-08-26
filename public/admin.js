@@ -209,3 +209,10 @@ const rankImages = {
     "Immortal": "/Immortal_1_Rank.webp",
     "Radiant": "/Radiant_Rank.webp"
 };
+function nextClip() {
+
+    currentClip++;
+
+    showClip();
+
+}
