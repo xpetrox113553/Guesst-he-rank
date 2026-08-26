@@ -12,6 +12,7 @@ let allClips = [];
 let currentClip = 0;
 
 let score = 0;
+
 let total = 0;
 
 async function loadClips() {
@@ -28,18 +29,7 @@ async function loadClips() {
 
 }
 function showClip() {
-
-    const clips =
-        document.getElementById("clips");
-
-    if (currentClip >= allClips.length) {
-
-        clips.innerHTML =
-            "<h2>🏆 Alle Clips gespielt!</h2>";
-
-        return;
-    }
-
+    
     const item =
         allClips[currentClip];
 
