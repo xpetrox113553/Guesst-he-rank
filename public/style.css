@@ -1704,4 +1704,444 @@ button:active {
     .rank-name {
         font-size: 9px;
     }
+    /* ========================================
+   RANK 1 / 2 / 3 AUSWAHL
+======================================== */
+
+.tier-selection {
+    margin-top: 20px;
 }
+
+.tier-panel {
+    padding: 25px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.055),
+            rgba(255,255,255,0.015)
+        );
+    border: 1px solid rgba(255,255,255,0.10);
+    border-top: 3px solid #ff4655;
+    animation: tierOpen 0.25s ease;
+}
+
+.tier-title {
+    text-align: center;
+    color: #ff4655;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.tier-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.tier-button {
+    min-height: 160px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.06),
+            rgba(255,255,255,0.02)
+        );
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    color: white;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    clip-path: none;
+
+    transition:
+        transform 0.2s ease,
+        border 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.tier-button:hover {
+    transform: translateY(-7px);
+
+    border-color: #ff4655;
+
+    background:
+        rgba(255,70,85,0.12);
+
+    box-shadow:
+        0 15px 40px
+        rgba(255,70,85,0.25);
+}
+
+.tier-button img {
+    width: 90px;
+    height: 90px;
+
+    object-fit: contain;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.tier-button:hover img {
+    transform: scale(1.12);
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(255,70,85,0.55)
+        );
+}
+
+.result-points {
+    margin-top: 15px;
+
+    color: #ff4655;
+
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.correct-result {
+    border-color: rgba(80,255,130,0.4);
+}
+
+.wrong-result {
+    border-color: rgba(255,70,85,0.4);
+}
+
+@keyframes tierOpen {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(-15px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .tier-buttons {
+        grid-template-columns: 1fr;
+    }
+/* ========================================
+   RANK 1 / 2 / 3 AUSWAHL
+======================================== */
+
+.tier-selection {
+    margin-top: 20px;
+}
+
+.tier-panel {
+    padding: 25px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.055),
+            rgba(255,255,255,0.015)
+        );
+    border: 1px solid rgba(255,255,255,0.10);
+    border-top: 3px solid #ff4655;
+    animation: tierOpen 0.25s ease;
+}
+
+.tier-title {
+    text-align: center;
+    color: #ff4655;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.tier-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.tier-button {
+    min-height: 160px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.06),
+            rgba(255,255,255,0.02)
+        );
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    color: white;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    clip-path: none;
+
+    transition:
+        transform 0.2s ease,
+        border 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.tier-button:hover {
+    transform: translateY(-7px);
+
+    border-color: #ff4655;
+
+    background:
+        rgba(255,70,85,0.12);
+
+    box-shadow:
+        0 15px 40px
+        rgba(255,70,85,0.25);
+}
+
+.tier-button img {
+    width: 90px;
+    height: 90px;
+
+    object-fit: contain;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.tier-button:hover img {
+    transform: scale(1.12);
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(255,70,85,0.55)
+        );
+}
+
+.result-points {
+    margin-top: 15px;
+
+    color: #ff4655;
+
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.correct-result {
+    border-color: rgba(80,255,130,0.4);
+}
+
+.wrong-result {
+    border-color: rgba(255,70,85,0.4);
+}
+
+@keyframes tierOpen {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(-15px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .tier-buttons {
+        grid-template-columns: 1fr;
+    }
+/* ========================================
+   RANK 1 / 2 / 3 AUSWAHL
+======================================== */
+
+.tier-selection {
+    margin-top: 20px;
+}
+
+.tier-panel {
+    padding: 25px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.055),
+            rgba(255,255,255,0.015)
+        );
+    border: 1px solid rgba(255,255,255,0.10);
+    border-top: 3px solid #ff4655;
+    animation: tierOpen 0.25s ease;
+}
+
+.tier-title {
+    text-align: center;
+    color: #ff4655;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.tier-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.tier-button {
+    min-height: 160px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.06),
+            rgba(255,255,255,0.02)
+        );
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    color: white;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    clip-path: none;
+
+    transition:
+        transform 0.2s ease,
+        border 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.tier-button:hover {
+    transform: translateY(-7px);
+
+    border-color: #ff4655;
+
+    background:
+        rgba(255,70,85,0.12);
+
+    box-shadow:
+        0 15px 40px
+        rgba(255,70,85,0.25);
+}
+
+.tier-button img {
+    width: 90px;
+    height: 90px;
+
+    object-fit: contain;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.tier-button:hover img {
+    transform: scale(1.12);
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(255,70,85,0.55)
+        );
+}
+
+.result-points {
+    margin-top: 15px;
+
+    color: #ff4655;
+
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.correct-result {
+    border-color: rgba(80,255,130,0.4);
+}
+
+.wrong-result {
+    border-color: rgba(255,70,85,0.4);
+}
+
+@keyframes tierOpen {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(-15px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .tier-buttons {
+        grid-template-columns: 1fr;
+    }
