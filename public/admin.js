@@ -1,96 +1,78 @@
 // ========================================
-// ADMIN LOGIN
+// NOXIN99 VALORANT CLIP QUIZ
+// ADMIN PANEL
 // ========================================
-
-const password = prompt("Admin Passwort");
-
-if (password !== "Noxin99") {
-    document.body.innerHTML = "<h1 style='color:#ff4655;font-family:Arial;text-align:center;margin-top:100px;'>❌ Kein Zugriff</h1>";
-    throw new Error("Kein Zugriff");
-}
 
 
 // ========================================
-// VALORANT ADMIN DESIGN
+// LOGIN SCREEN
 // ========================================
 
 document.body.innerHTML = `
-    <div class="valo-background">
 
-        <div class="valo-grid"></div>
+    <div class="login-screen">
 
-        <div class="valo-glow valo-glow-left"></div>
-        <div class="valo-glow valo-glow-right"></div>
+        <div class="login-grid"></div>
 
-        <header class="topbar">
+        <div class="login-glow"></div>
 
-            <div class="logo">
+        <div class="login-box">
 
-                <div class="logo-mark">
-                    V
-                </div>
-
-                <div>
-                    <div class="logo-title">
-                        NOXIN99
-                    </div>
-
-                    <div class="logo-subtitle">
-                        VALORANT CLIP QUIZ
-                    </div>
-                </div>
-
+            <div class="login-logo">
+                V
             </div>
 
-            <div class="admin-badge">
-                <span class="status-dot"></span>
-                ADMIN MODE
+            <div class="login-small">
+                NOXIN99
             </div>
 
-        </header>
+            <h1>
+                ADMIN PANEL
+            </h1>
 
+            <div class="login-line"></div>
 
-        <main class="main">
+            <p class="login-subtitle">
+                VALORANT CLIP QUIZ
+            </p>
 
-            <div class="quiz-header">
+            <label>
+                ADMIN PASSWORD
+            </label>
 
-                <div>
+            <input
+                id="adminPassword"
+                type="password"
+                placeholder="Enter password..."
+                autocomplete="off"
+            >
 
-                    <div class="small-title">
-                        CLIP ANALYSIS
-                    </div>
+            <button
+                id="loginButton"
+                type="button"
+            >
+                ENTER ADMIN PANEL
+            </button>
 
-                    <h1>
-                        WELCHEN RANG HAT DER SPIELER?
-                    </h1>
+            <div
+                id="loginError"
+                class="login-error"
+            ></div>
 
-                    <div class="header-line"></div>
-
-                </div>
-
-                <div class="score-box">
-
-                    <span>SCORE</span>
-
-                    <strong id="scoreDisplay">
-                        0 / 0
-                    </strong>
-
-                </div>
-
+            <div class="login-status">
+                <span></span>
+                SECURE ADMIN ACCESS
             </div>
 
-
-            <div id="clips"></div>
-
-        </main>
+        </div>
 
     </div>
+
 `;
 
 
 // ========================================
-// CSS
+// LOGIN + ADMIN CSS
 // ========================================
 
 const style = document.createElement("style");
@@ -115,19 +97,420 @@ body {
 
 body {
     min-height: 100vh;
-
     font-family: 'Rajdhani', Arial, sans-serif;
-
     background: #08090d;
-
     color: white;
-
     overflow-x: hidden;
 }
 
 
 /* ========================================
-   BACKGROUND
+   LOGIN
+======================================== */
+
+.login-screen {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,70,85,0.13),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #08090d,
+            #111219,
+            #08090d
+        );
+}
+
+
+.login-screen::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: #ff4655;
+
+    box-shadow:
+        0 0 25px #ff4655;
+}
+
+
+.login-grid {
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0.10;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.08) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.08) 1px,
+            transparent 1px
+        );
+
+    background-size: 60px 60px;
+}
+
+
+.login-glow {
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,70,85,0.08);
+
+    filter: blur(100px);
+}
+
+
+.login-box {
+    width: min(440px, calc(100% - 35px));
+
+    padding: 45px 42px;
+
+    position: relative;
+    z-index: 2;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(24,26,34,0.98),
+            rgba(10,11,16,0.98)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.10);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,0.65),
+        0 0 50px rgba(255,70,85,0.06);
+}
+
+
+.login-box::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 120px;
+    height: 3px;
+
+    background: #ff4655;
+
+    box-shadow:
+        0 0 20px #ff4655;
+}
+
+
+.login-box::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 55px;
+    height: 55px;
+
+    border-right:
+        2px solid rgba(255,70,85,0.5);
+
+    border-bottom:
+        2px solid rgba(255,70,85,0.5);
+}
+
+
+.login-logo {
+    width: 65px;
+    height: 65px;
+
+    margin:
+        0 auto 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ff4655;
+
+    font-size: 34px;
+    font-weight: 700;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            82% 100%,
+            18% 100%
+        );
+
+    box-shadow:
+        0 0 30px rgba(255,70,85,0.45);
+}
+
+
+.login-small {
+    color: #ff4655;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 5px;
+}
+
+
+.login-box h1 {
+    margin: 5px 0 0;
+
+    font-size: 36px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+}
+
+
+.login-line {
+    width: 70px;
+    height: 3px;
+
+    margin: 14px auto;
+
+    background: #ff4655;
+
+    box-shadow:
+        0 0 12px rgba(255,70,85,0.7);
+}
+
+
+.login-subtitle {
+    margin:
+        0 0 35px;
+
+    color: #777d88;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+}
+
+
+.login-box label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    text-align: left;
+
+    color: #8d929d;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+#adminPassword {
+    width: 100%;
+    height: 52px;
+
+    padding:
+        0 16px;
+
+    outline: none;
+
+    border:
+        1px solid rgba(255,255,255,0.10);
+
+    background:
+        rgba(255,255,255,0.035);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    letter-spacing: 1px;
+
+    transition:
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+#adminPassword:focus {
+    border-color: #ff4655;
+
+    box-shadow:
+        0 0 20px rgba(255,70,85,0.15);
+}
+
+
+#adminPassword::placeholder {
+    color: #555a64;
+}
+
+
+.login-box button {
+    width: 100%;
+    height: 52px;
+
+    margin-top: 18px;
+
+    border: none;
+
+    background: #ff4655;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    clip-path:
+        polygon(
+            0 0,
+            96% 0,
+            100% 25%,
+            100% 100%,
+            4% 100%,
+            0 75%
+        );
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.login-box button:hover {
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(255,70,85,0.35);
+}
+
+
+.login-error {
+    min-height: 22px;
+
+    margin-top: 14px;
+
+    color: #ff4655;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.login-status {
+    margin-top: 25px;
+
+    color: #555a64;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+
+.login-status span {
+    display: inline-block;
+
+    width: 6px;
+    height: 6px;
+
+    margin-right: 7px;
+
+    border-radius: 50%;
+
+    background: #ff4655;
+
+    box-shadow:
+        0 0 8px #ff4655;
+}
+
+
+.login-wrong {
+    animation:
+        loginShake 0.25s ease;
+}
+
+
+@keyframes loginShake {
+
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-7px);
+    }
+
+    50% {
+        transform: translateX(7px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+
+}
+
+
+/* ========================================
+   ADMIN BACKGROUND
 ======================================== */
 
 .valo-background {
@@ -142,11 +525,6 @@ body {
             circle at 50% 15%,
             rgba(255,70,85,0.15),
             transparent 38%
-        ),
-        radial-gradient(
-            circle at 10% 90%,
-            rgba(255,70,85,0.08),
-            transparent 30%
         ),
         linear-gradient(
             135deg,
@@ -198,10 +576,6 @@ body {
 }
 
 
-/* ========================================
-   GRID
-======================================== */
-
 .valo-grid {
     position: fixed;
 
@@ -223,39 +597,6 @@ body {
         );
 
     background-size: 60px 60px;
-}
-
-
-/* ========================================
-   BACKGROUND GLOW
-======================================== */
-
-.valo-glow {
-    position: fixed;
-
-    width: 400px;
-    height: 400px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,70,85,0.06);
-
-    filter: blur(100px);
-
-    pointer-events: none;
-}
-
-
-.valo-glow-left {
-    left: -250px;
-    top: 35%;
-}
-
-
-.valo-glow-right {
-    right: -250px;
-    top: 15%;
 }
 
 
@@ -289,10 +630,6 @@ body {
     z-index: 10;
 }
 
-
-/* ========================================
-   LOGO
-======================================== */
 
 .logo {
     display: flex;
@@ -351,10 +688,6 @@ body {
     color: #8d929d;
 }
 
-
-/* ========================================
-   ADMIN BADGE
-======================================== */
 
 .admin-badge {
     font-size: 13px;
@@ -428,10 +761,6 @@ body {
 }
 
 
-/* ========================================
-   QUIZ HEADER
-======================================== */
-
 .quiz-header {
     display: flex;
 
@@ -485,10 +814,6 @@ body {
 }
 
 
-/* ========================================
-   SCORE
-======================================== */
-
 .score-box {
     min-width: 155px;
 
@@ -502,9 +827,6 @@ body {
 
     border-right:
         3px solid #ff4655;
-
-    box-shadow:
-        0 10px 35px rgba(0,0,0,0.25);
 }
 
 
@@ -525,8 +847,6 @@ body {
     margin-top: 2px;
 
     font-size: 28px;
-
-    letter-spacing: 1px;
 }
 
 
@@ -590,14 +910,8 @@ body {
 
     border-bottom:
         2px solid rgba(255,70,85,0.45);
-
-    pointer-events: none;
 }
 
-
-/* ========================================
-   CLIP HEADER
-======================================== */
 
 .clip-header {
     display: flex;
@@ -654,20 +968,6 @@ body {
 }
 
 
-.video-wrapper::after {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    border:
-        1px solid rgba(255,70,85,0.08);
-
-    pointer-events: none;
-}
-
-
 .card video {
     display: block;
 
@@ -686,7 +986,7 @@ body {
 
 
 /* ========================================
-   PLAYER INFO
+   PLAYER
 ======================================== */
 
 .player-info {
@@ -763,8 +1063,7 @@ body {
 
 
 .card h3 {
-    margin:
-        0;
+    margin: 0;
 
     text-transform: uppercase;
 
@@ -909,7 +1208,8 @@ body {
 
 
 .result-title {
-    margin: 0 0 10px;
+    margin:
+        0 0 10px;
 
     font-size: 32px;
 
@@ -1029,10 +1329,6 @@ button:active {
 }
 
 
-/* ========================================
-   NEXT BUTTON
-======================================== */
-
 .next-button-wrapper {
     display: flex;
 
@@ -1062,7 +1358,8 @@ button:active {
 
 
 .complete-card h1 {
-    margin: 5px 0;
+    margin:
+        5px 0;
 
     font-size: 42px;
 
@@ -1088,10 +1385,6 @@ button:active {
     font-size: 35px;
 }
 
-
-/* ========================================
-   ERROR
-======================================== */
 
 .error-card {
     text-align: center;
@@ -1225,12 +1518,189 @@ document.head.appendChild(style);
 
 
 // ========================================
+// LOGIN
+// ========================================
+
+function adminLogin() {
+
+    const input =
+        document.getElementById("adminPassword");
+
+    const error =
+        document.getElementById("loginError");
+
+    const box =
+        document.querySelector(".login-box");
+
+
+    if (!input || !error) {
+        return;
+    }
+
+
+    if (input.value === "Noxin99") {
+
+        startAdminPanel();
+
+    }
+
+    else {
+
+        error.textContent =
+            "❌ FALSCHES PASSWORT";
+
+        input.value = "";
+
+        input.focus();
+
+
+        if (box) {
+
+            box.classList.remove(
+                "login-wrong"
+            );
+
+            void box.offsetWidth;
+
+            box.classList.add(
+                "login-wrong"
+            );
+
+        }
+
+    }
+
+}
+
+
+document
+    .getElementById("loginButton")
+    .addEventListener(
+        "click",
+        adminLogin
+    );
+
+
+document
+    .getElementById("adminPassword")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                adminLogin();
+
+            }
+
+        }
+    );
+
+
+// ========================================
+// ADMIN PANEL
+// ========================================
+
+function startAdminPanel() {
+
+    document.body.innerHTML = `
+
+        <div class="valo-background">
+
+            <div class="valo-grid"></div>
+
+            <header class="topbar">
+
+                <div class="logo">
+
+                    <div class="logo-mark">
+                        V
+                    </div>
+
+                    <div>
+
+                        <div class="logo-title">
+                            NOXIN99
+                        </div>
+
+                        <div class="logo-subtitle">
+                            VALORANT CLIP QUIZ
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="admin-badge">
+
+                    <span class="status-dot"></span>
+
+                    ADMIN MODE
+
+                </div>
+
+            </header>
+
+
+            <main class="main">
+
+                <div class="quiz-header">
+
+                    <div>
+
+                        <div class="small-title">
+                            CLIP ANALYSIS
+                        </div>
+
+                        <h1>
+                            WELCHEN RANG HAT DER SPIELER?
+                        </h1>
+
+                        <div class="header-line"></div>
+
+                    </div>
+
+
+                    <div class="score-box">
+
+                        <span>
+                            SCORE
+                        </span>
+
+                        <strong id="scoreDisplay">
+                            0 / 0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div id="clips"></div>
+
+            </main>
+
+        </div>
+
+    `;
+
+
+    loadClips();
+
+}
+
+
+// ========================================
 // QUIZ VARIABLES
 // ========================================
 
 let allClips = [];
+
 let currentClip = 0;
+
 let score = 0;
+
 let total = 0;
 
 
@@ -1244,6 +1714,7 @@ async function loadClips() {
 
         const response =
             await fetch("/submissions");
+
 
         if (!response.ok) {
 
@@ -1382,7 +1853,9 @@ function showClip() {
 
 
                 <span class="clip-label">
+
                     NOXIN99 • GUESS THE RANK
+
                 </span>
 
             </div>
@@ -1412,6 +1885,7 @@ function showClip() {
                     </div>
 
                 </div>
+
 
                 <div class="clip-label">
                     ANALYZING CLIP
@@ -1631,13 +2105,13 @@ function guess(realRank, selectedRank) {
         document.getElementById("result");
 
 
-    const img =
-        rankImages[realRank];
-
-
     if (!result) {
         return;
     }
+
+
+    const img =
+        rankImages[realRank];
 
 
     if (realRank === selectedRank) {
@@ -1840,10 +2314,3 @@ const rankImages = {
         "/Diamond_1_Rank.webp"
 
 };
-
-
-// ========================================
-// START
-// ========================================
-
-loadClips();
