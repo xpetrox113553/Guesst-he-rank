@@ -828,97 +828,68 @@ function normalizeRank(rank) {
 // RANG RATEN
 // ========================================
 
-function guess(
-    realRank,
-    selectedRank
-) {
+function guess(realRank, selectedRank) {
 
-    if (answered) {
-        return;
-    }
-
-
-    answered = true;
-
-
-    realRank =
-        normalizeRank(
-            realRank
-        );
-
-
-    selectedRank =
-        normalizeRank(
-            selectedRank
-        );
-
+    // Rangnamen vereinheitlichen
+    realRank = String(realRank)
+        .trim()
+        .replace(/Platinuminum/gi, "Platinum")
+        .replace(/Platinumum/gi, "Platinum")
+        .replace(/Platin/gi, "Platinum")
+        .replace(/Diamant/gi, "Diamond");
 
     const result =
-        document.getElementById(
-            "result"
-        );
-
+        document.getElementById("result");
 
     if (!result) {
         return;
     }
 
+    // Nur den Grundrang für das Bild verwenden
+    const rankBase =
+        realRank
+            .replace(/\s*[123]\s*$/, "")
+            .trim();
 
-    const correct =
-        realRank === selectedRank;
-
-
-    const baseRank =
-        getBaseRank(
-            realRank
-        );
-
-
-    const image =
-        rankImages[baseRank] ||
+    const img =
+        rankImages[rankBase] ||
         rankImages[realRank];
 
+    const isCorrect =
+        realRank.toLowerCase() ===
+        selectedRank.toLowerCase();
 
-    if (correct) {
+    if (isCorrect) {
 
         score++;
 
-
         result.innerHTML = `
 
-            <div
-                class="result-box correct-result"
-            >
+            <div class="result-box correct">
 
                 <h2 class="result-title">
-
-                    ✅ RICHTIG!
-
+                    ✓ RICHTIG!
                 </h2>
 
+                ${
+                    img
+                    ? `
+                    <img
+                        src="${img}"
+                        alt="${realRank}"
+                    >
+                    `
+                    : ""
+                }
 
-                <img
-                    src="${image}"
-                    alt="${realRank}"
-                >
-
+                <div class="result-rank">
+                    ${realRank}
+                </div>
 
                 <p class="result-text">
-
-                    Der echte Rang ist:
-
-                    <strong>
-                        ${realRank}
-                    </strong>
-
+                    Dein Tipp:
+                    <strong>${selectedRank}</strong>
                 </p>
-
-
-                <div class="result-points">
-
-                    +1 PUNKT
-
-                </div>
 
             </div>
 
@@ -928,42 +899,35 @@ function guess(
 
         result.innerHTML = `
 
-            <div
-                class="result-box wrong-result"
-            >
+            <div class="result-box wrong">
 
                 <h2 class="result-title">
-
-                    ❌ FALSCH!
-
+                    ✕ FALSCH!
                 </h2>
 
+                ${
+                    img
+                    ? `
+                    <img
+                        src="${img}"
+                        alt="${realRank}"
+                    >
+                    `
+                    : ""
+                }
+
+                <div class="result-rank">
+                    ${realRank}
+                </div>
 
                 <p class="result-text">
-
                     Dein Tipp:
-
-                    <strong>
-                        ${selectedRank}
-                    </strong>
-
+                    <strong>${selectedRank}</strong>
                 </p>
 
-
-                <img
-                    src="${image}"
-                    alt="${realRank}"
-                >
-
-
                 <p class="result-text">
-
                     Echter Rang:
-
-                    <strong>
-                        ${realRank}
-                    </strong>
-
+                    <strong>${realRank}</strong>
                 </p>
 
             </div>
@@ -972,25 +936,27 @@ function guess(
 
     }
 
-
     updateScore();
 
-
     const nextButton =
-        document.getElementById(
-            "nextButton"
-        );
-
+        document.getElementById("nextButton");
 
     if (nextButton) {
-
         nextButton.style.display =
             "inline-block";
-
     }
 
+    document
+        .querySelectorAll(".rank-choice")
+        .forEach(choice => {
 
-    disableChoices();
+            choice.style.pointerEvents =
+                "none";
+
+            choice.style.opacity =
+                "0.45";
+
+        });
 
 }
 
