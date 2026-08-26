@@ -16,6 +16,73 @@ let total = 0;
 
 async function loadClips() {
 
+    const response =
+        await fetch("/submissions");
+
+    allClips =
+        await response.json();
+
+    currentClip = 0;
+
+    showClip();
+
+}
+function showClip() {
+
+    const clips =
+        document.getElementById("clips");
+
+    if (currentClip >= allClips.length) {
+
+        clips.innerHTML =
+            "<h2>🏆 Alle Clips gespielt!</h2>";
+
+        return;
+    }
+
+    const item =
+        allClips[currentClip];
+
+    clips.innerHTML = `
+
+        <video
+            controls
+            style="
+                width:100%;
+                max-height:700px;
+                border-radius:15px;
+            "
+            src="${item.clip_url}">
+        </video>
+
+        <p>
+            Spieler:
+            ${item.riot_name}
+        </p>
+
+        <div class="ranks">
+
+            <img class="rank-icon" src="/Iron_1_Rank.webp" onclick="guess('${item.rank}','Iron')">
+            <img class="rank-icon" src="/Bronze_1_Rank.webp" onclick="guess('${item.rank}','Bronze')">
+            <img class="rank-icon" src="/Silver_1_Rank.webp" onclick="guess('${item.rank}','Silver')">
+            <img class="rank-icon" src="/Gold_1_Rank.webp" onclick="guess('${item.rank}','Gold')">
+            <img class="rank-icon" src="/Platinum_1_Rank.webp" onclick="guess('${item.rank}','Platinum')">
+            <img class="rank-icon" src="/Diamond_1_Rank.webp" onclick="guess('${item.rank}','Diamond')">
+            <img class="rank-icon" src="/Ascendant_1_Rank.webp" onclick="guess('${item.rank}','Ascendant')">
+            <img class="rank-icon" src="/Immortal_1_Rank.webp" onclick="guess('${item.rank}','Immortal')">
+            <img class="rank-icon" src="/Radiant_Rank.webp" onclick="guess('${item.rank}','Radiant')">
+
+        </div>
+
+        <br>
+
+        <button onclick="nextClip()">
+            ➡️ Nächster Clip
+        </button>
+
+    `;
+
+}
     const clips =
         document.getElementById("clips");
 
