@@ -1,3 +1,13 @@
+const password = prompt("Admin Passwort");
+
+if (password !== "Noxin99") {
+
+    document.body.innerHTML =
+        "<h1>❌ Kein Zugriff</h1>";
+
+    throw new Error("Kein Zugriff");
+
+}
 async function loadClips() {
 
     const clips =
