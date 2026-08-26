@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -6,6 +7,7 @@
 <title>Guess The Rank Submission</title>
 
 <style>
+
 body{
     font-family:Arial,sans-serif;
     background:#0f1923;
@@ -35,6 +37,7 @@ input,select{
     margin:10px 0;
     border:none;
     border-radius:10px;
+    box-sizing:border-box;
 }
 
 button{
@@ -57,8 +60,16 @@ button:hover{
     margin-top:15px;
     text-align:center;
 }
+
+.rank-title{
+    margin-top:10px;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+
 </style>
 </head>
+
 <body>
 
 <div class="card">
@@ -67,31 +78,126 @@ button:hover{
 
 <p>Lade deinen Valorant Clip hoch.</p>
 
-<input id="riotName" placeholder="Riot Name">
+<input
+    id="riotName"
+    placeholder="Riot Name"
+>
+
+
+<div class="rank-title">
+    Rang auswählen
+</div>
 
 <select id="rank">
-<option>Iron</option>
-<option>Bronze</option>
-<option>Silver</option>
-<option>Gold</option>
-<option>Platin</option>
-<option>Diamant</option>
-<option>Ascendant</option>
-<option>Immortal</option>
-<option>Radiant</option>
+
+    <option value="Iron">Iron</option>
+
+    <option value="Bronze">Bronze</option>
+
+    <option value="Silver">Silver</option>
+
+    <option value="Gold">Gold</option>
+
+    <option value="Platinum">Platinum</option>
+
+    <option value="Diamond">Diamond</option>
+
+    <option value="Ascendant">Ascendant</option>
+
+    <option value="Immortal">Immortal</option>
+
+    <option value="Radiant">Radiant</option>
+
 </select>
 
-<input id="clip" type="file" accept="video/*">
+
+<div
+    class="rank-title"
+    id="tierTitle"
+>
+    Stufe auswählen
+</div>
+
+
+<select id="tier">
+
+    <option value="1">1</option>
+
+    <option value="2">2</option>
+
+    <option value="3">3</option>
+
+</select>
+
+
+<input
+    id="clip"
+    type="file"
+    accept="video/*"
+>
+
 
 <button onclick="uploadClip()">
-📤 Clip hochladen
+    📤 Clip hochladen
 </button>
+
 
 <div id="status"></div>
 
 </div>
 
+
+<script>
+
+
+// ========================================
+// RANG-STUFE
+// ========================================
+
+const rankSelect =
+    document.getElementById("rank");
+
+const tierSelect =
+    document.getElementById("tier");
+
+const tierTitle =
+    document.getElementById("tierTitle");
+
+
+// Radiant hat keine 1/2/3
+
+function updateTier() {
+
+    if (rankSelect.value === "Radiant") {
+
+        tierSelect.style.display = "none";
+
+        tierTitle.style.display = "none";
+
+    } else {
+
+        tierSelect.style.display = "block";
+
+        tierTitle.style.display = "block";
+
+    }
+
+}
+
+
+rankSelect.addEventListener(
+    "change",
+    updateTier
+);
+
+
+updateTier();
+
+</script>
+
+
 <script src="upload.js"></script>
 
 </body>
 </html>
+```
