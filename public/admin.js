@@ -25,11 +25,19 @@ async function loadClips() {
 
     currentClip = 0;
 
-    showClip();
+  function showClip() {
 
-}
-function showClip() {
-    
+    const clips =
+        document.getElementById("clips");
+
+    if (currentClip >= allClips.length) {
+
+        clips.innerHTML =
+            "<h2>🏆 Alle Clips gespielt!</h2>";
+
+        return;
+    }
+
     const item =
         allClips[currentClip];
 
@@ -69,6 +77,10 @@ function showClip() {
         <button onclick="nextClip()">
             ➡️ Nächster Clip
         </button>
+
+    `;
+
+}
 
         clips.innerHTML += `
 
