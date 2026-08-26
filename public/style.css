@@ -78,3 +78,171 @@ button{
 button:hover{
     opacity:0.9;
 }
+```css
+/* =========================================
+   AGENTEN
+========================================= */
+
+.agent {
+    position: fixed;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    opacity: 0.22;
+
+    filter:
+        saturate(0.8)
+        contrast(1.1)
+        drop-shadow(
+            0 0 25px
+            rgba(255,70,85,0.18)
+        );
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+/* WAYLAY LINKS UNTEN */
+
+.waylay-left {
+    left: -110px;
+
+    bottom: -100px;
+
+    width: 520px;
+
+    transform:
+        scaleX(-1);
+
+    mask-image:
+        linear-gradient(
+            to right,
+            transparent 0%,
+            black 25%,
+            black 75%,
+            transparent 100%
+        );
+}
+
+
+/* RAZE RECHTS UNTEN */
+
+.raze-right {
+    right: -120px;
+
+    bottom: -90px;
+
+    width: 520px;
+
+    mask-image:
+        linear-gradient(
+            to left,
+            transparent 0%,
+            black 25%,
+            black 75%,
+            transparent 100%
+        );
+}
+
+
+/* WAYLAY ICON OBEN */
+
+.waylay-icon {
+    position: fixed;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    top: 105px;
+
+    right: 45px;
+
+    width: 75px;
+
+    opacity: 0.18;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(255,70,85,0.4)
+        );
+
+    animation:
+        iconFloat 4s ease-in-out infinite;
+}
+
+
+@keyframes iconFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-8px);
+    }
+
+}
+
+
+/* =========================================
+   AGENTEN BEIM HOVER
+========================================= */
+
+.card:hover ~ .agent {
+    opacity: 0.27;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .waylay-left {
+        left: -180px;
+        bottom: -80px;
+        width: 400px;
+        opacity: 0.12;
+    }
+
+    .raze-right {
+        right: -180px;
+        bottom: -80px;
+        width: 400px;
+        opacity: 0.12;
+    }
+
+    .waylay-icon {
+        right: 15px;
+        top: 90px;
+        width: 55px;
+        opacity: 0.12;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .agent {
+        opacity: 0.08;
+    }
+
+    .waylay-icon {
+        display: none;
+    }
+
+}
+```
