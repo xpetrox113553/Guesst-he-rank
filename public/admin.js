@@ -1,1879 +1,182 @@
-// ========================================
+// ============================================================
 // NOXIN99 VALORANT CLIP QUIZ
-// ADMIN PANEL
-// ========================================
+// MONSTER ADMIN PANEL
+// ============================================================
+
+const ADMIN_PASSWORD = "Noxin99";
+
+let allClips = [];
+let currentClip = 0;
+
+let score = 0;
+let total = 0;
+
+let answered = false;
+let correctAnswers = 0;
+let wrongAnswers = 0;
+let streak = 0;
+let bestStreak = 0;
 
 
-// ========================================
+// ============================================================
+// RANK SYSTEM
+// ============================================================
+
+const RANKS = [
+    "Iron",
+    "Bronze",
+    "Silver",
+    "Gold",
+    "Platinum",
+    "Diamond",
+    "Ascendant",
+    "Immortal",
+    "Radiant"
+];
+
+const RANK_ICONS = {
+    Iron: "/Iron_1_Rank.webp",
+    Bronze: "/Bronze_1_Rank.webp",
+    Silver: "/Silver_1_Rank.webp",
+    Gold: "/Gold_1_Rank.webp",
+    Platinum: "/Platinum_1_Rank.webp",
+    Diamond: "/Diamond_1_Rank.webp",
+    Ascendant: "/Ascendant_1_Rank.webp",
+    Immortal: "/Immortal_1_Rank.webp",
+    Radiant: "/Radiant_Rank.webp"
+};
+
+
+// ============================================================
 // LOGIN
-// ========================================
+// ============================================================
 
-document.body.innerHTML = `
+function renderLogin() {
 
-    <div class="login-screen">
+    document.body.innerHTML = `
+        <div class="login-screen">
 
-        <div class="login-grid"></div>
+            <div class="login-grid"></div>
 
-        <div class="login-glow"></div>
+            <div class="login-glow"></div>
 
-        <div class="login-box">
+            <div class="login-box">
 
-            <div class="login-logo">
-                V
-            </div>
+                <div class="login-logo">
+                    V
+                </div>
 
-            <div class="login-small">
-                NOXIN99
-            </div>
+                <div class="login-small">
+                    NOXIN99
+                </div>
 
-            <h1>
-                ADMIN PANEL
-            </h1>
+                <h1>
+                    ADMIN PANEL
+                </h1>
 
-            <div class="login-line"></div>
+                <div class="login-line"></div>
 
-            <p class="login-subtitle">
-                VALORANT CLIP QUIZ
-            </p>
+                <p class="login-subtitle">
+                    VALORANT CLIP QUIZ
+                </p>
 
-            <label>
-                ADMIN PASSWORD
-            </label>
+                <label for="adminPassword">
+                    ADMIN PASSWORD
+                </label>
 
-            <input
-                id="adminPassword"
-                type="password"
-                placeholder="Enter password..."
-                autocomplete="off"
-            >
+                <input
+                    id="adminPassword"
+                    type="password"
+                    placeholder="Enter password..."
+                    autocomplete="off"
+                >
 
-            <button
-                id="loginButton"
-                type="button"
-            >
-                ENTER ADMIN PANEL
-            </button>
+                <button
+                    class="login-button"
+                    id="loginButton"
+                    type="button"
+                >
+                    ENTER ADMIN PANEL
+                </button>
 
-            <div
-                id="loginError"
-                class="login-error"
-            ></div>
+                <div
+                    id="loginError"
+                    class="login-error"
+                ></div>
 
-            <div class="login-status">
-                <span></span>
-                SECURE ADMIN ACCESS
+                <div class="login-status">
+                    <span></span>
+                    SECURE ADMIN ACCESS
+                </div>
+
             </div>
 
         </div>
+    `;
 
-    </div>
+    document
+        .getElementById("loginButton")
+        .addEventListener("click", adminLogin);
 
-`;
+    document
+        .getElementById("adminPassword")
+        .addEventListener("keydown", event => {
 
+            if (event.key === "Enter") {
+                adminLogin();
+            }
 
-// ========================================
-// CSS
-// ========================================
+        });
 
-const style = document.createElement("style");
-
-style.innerHTML = `
-
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
-
-
-* {
-    box-sizing: border-box;
-}
-
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
-}
-
-
-body {
-    min-height: 100vh;
-
-    font-family:
-        'Rajdhani',
-        Arial,
-        sans-serif;
-
-    background: #08090d;
-
-    color: white;
-
-    overflow-x: hidden;
-}
-
-
-/* ========================================
-   LOGIN
-======================================== */
-
-.login-screen {
-
-    min-height: 100vh;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    position: relative;
-
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(255,70,85,0.14),
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            #08090d,
-            #111219,
-            #08090d
-        );
-}
-
-
-.login-screen::before {
-
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 4px;
-
-    background: #ff4655;
-
-    box-shadow:
-        0 0 25px #ff4655;
-}
-
-
-.login-grid {
-
-    position: absolute;
-
-    inset: 0;
-
-    opacity: 0.10;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,0.08) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,0.08) 1px,
-            transparent 1px
-        );
-
-    background-size: 60px 60px;
-}
-
-
-.login-glow {
-
-    position: absolute;
-
-    width: 500px;
-    height: 500px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,70,85,0.08);
-
-    filter: blur(100px);
-}
-
-
-.login-box {
-
-    width:
-        min(440px, calc(100% - 35px));
-
-    padding:
-        45px 42px;
-
-    position: relative;
-
-    z-index: 2;
-
-    text-align: center;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(24,26,34,0.98),
-            rgba(10,11,16,0.98)
-        );
-
-    border:
-        1px solid rgba(255,255,255,0.10);
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,0.65),
-        0 0 50px rgba(255,70,85,0.06);
-}
-
-
-.login-box::before {
-
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 120px;
-    height: 3px;
-
-    background: #ff4655;
-
-    box-shadow:
-        0 0 20px #ff4655;
-}
-
-
-.login-box::after {
-
-    content: "";
-
-    position: absolute;
-
-    right: 0;
-    bottom: 0;
-
-    width: 55px;
-    height: 55px;
-
-    border-right:
-        2px solid rgba(255,70,85,0.5);
-
-    border-bottom:
-        2px solid rgba(255,70,85,0.5);
-}
-
-
-.login-logo {
-
-    width: 65px;
-    height: 65px;
-
-    margin:
-        0 auto 14px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background: #ff4655;
-
-    font-size: 34px;
-
-    font-weight: 700;
-
-    clip-path:
-        polygon(
-            0 0,
-            100% 0,
-            82% 100%,
-            18% 100%
-        );
-
-    box-shadow:
-        0 0 30px rgba(255,70,85,0.45);
-}
-
-
-.login-small {
-
-    color: #ff4655;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    letter-spacing: 5px;
-}
-
-
-.login-box h1 {
-
-    margin:
-        5px 0 0;
-
-    font-size: 36px;
-
-    letter-spacing: 3px;
-
-    text-transform: uppercase;
-}
-
-
-.login-line {
-
-    width: 70px;
-    height: 3px;
-
-    margin:
-        14px auto;
-
-    background: #ff4655;
-
-    box-shadow:
-        0 0 12px rgba(255,70,85,0.7);
-}
-
-
-.login-subtitle {
-
-    margin:
-        0 0 35px;
-
-    color: #777d88;
-
-    font-size: 12px;
-
-    letter-spacing: 3px;
-}
-
-
-.login-box label {
-
-    display: block;
-
-    margin-bottom: 8px;
-
-    text-align: left;
-
-    color: #8d929d;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: 2px;
-}
-
-
-#adminPassword {
-
-    width: 100%;
-
-    height: 52px;
-
-    padding:
-        0 16px;
-
-    outline: none;
-
-    border:
-        1px solid rgba(255,255,255,0.10);
-
-    background:
-        rgba(255,255,255,0.035);
-
-    color: white;
-
-    font-family: inherit;
-
-    font-size: 16px;
-
-    letter-spacing: 1px;
-
-    transition:
-        border 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-#adminPassword:focus {
-
-    border-color: #ff4655;
-
-    box-shadow:
-        0 0 20px rgba(255,70,85,0.15);
-}
-
-
-#adminPassword::placeholder {
-    color: #555a64;
-}
-
-
-.login-box button {
-
-    width: 100%;
-
-    height: 52px;
-
-    margin-top: 18px;
-
-    border: none;
-
-    background: #ff4655;
-
-    color: white;
-
-    font-family: inherit;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-
-    cursor: pointer;
-
-    clip-path:
-        polygon(
-            0 0,
-            96% 0,
-            100% 25%,
-            100% 100%,
-            4% 100%,
-            0 75%
-        );
-
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
-}
-
-
-.login-box button:hover {
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 10px 30px
-        rgba(255,70,85,0.35);
-}
-
-
-.login-error {
-
-    min-height: 22px;
-
-    margin-top: 14px;
-
-    color: #ff4655;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    letter-spacing: 1px;
-}
-
-
-.login-status {
-
-    margin-top: 25px;
-
-    color: #555a64;
-
-    font-size: 10px;
-
-    letter-spacing: 2px;
-}
-
-
-.login-status span {
-
-    display: inline-block;
-
-    width: 6px;
-    height: 6px;
-
-    margin-right: 7px;
-
-    border-radius: 50%;
-
-    background: #ff4655;
-
-    box-shadow:
-        0 0 8px #ff4655;
-}
-
-
-.login-wrong {
-
-    animation:
-        loginShake 0.25s ease;
-}
-
-
-@keyframes loginShake {
-
-    0% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-7px);
-    }
-
-    50% {
-        transform: translateX(7px);
-    }
-
-    75% {
-        transform: translateX(-5px);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-
-}
-
-
-/* ========================================
-   ADMIN BACKGROUND
-======================================== */
-
-.valo-background {
-
-    min-height: 100vh;
-
-    position: relative;
-
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at 50% 15%,
-            rgba(255,70,85,0.15),
-            transparent 38%
-        ),
-        linear-gradient(
-            135deg,
-            #08090d 0%,
-            #101117 50%,
-            #08090d 100%
-        );
-}
-
-
-.valo-background::before {
-
-    content: "";
-
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 4px;
-
-    background: #ff4655;
-
-    box-shadow:
-        0 0 25px rgba(255,70,85,0.9);
-
-    z-index: 20;
-}
-
-
-.valo-background::after {
-
-    content: "";
-
-    position: fixed;
-
-    right: -250px;
-    bottom: -250px;
-
-    width: 600px;
-    height: 600px;
-
-    border:
-        1px solid rgba(255,70,85,0.22);
-
-    transform:
-        rotate(45deg);
-
-    pointer-events: none;
-}
-
-
-.valo-grid {
-
-    position: fixed;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    opacity: 0.10;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,0.08) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,0.08) 1px,
-            transparent 1px
-        );
-
-    background-size: 60px 60px;
-}
-
-
-/* ========================================
-   AGENTS
-======================================== */
-
-.agent-bg {
-
-    position: fixed;
-
-    z-index: 1;
-
-    pointer-events: none;
-
-    user-select: none;
-
-    object-fit: contain;
-
-    opacity: 0.42;
-
-    filter:
-        saturate(0.8)
-        brightness(0.65)
-        contrast(1.08)
-        drop-shadow(
-            0 0 35px
-            rgba(255,70,85,0.12)
-        );
-
-    transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
-}
-
-
-/* WAYLAY */
-
-.waylay-bg {
-
-    left: -125px;
-
-    bottom: -90px;
-
-    width: 560px;
-
-    max-height: 82vh;
-
-    object-position:
-        bottom left;
-}
-
-
-/* RAZE */
-
-.raze-bg {
-
-    right: -135px;
-
-    bottom: -80px;
-
-    width: 570px;
-
-    max-height: 82vh;
-
-    object-position:
-        bottom right;
-}
-
-
-/* WAYLAY ICON */
-
-.agent-icon-bg {
-
-    position: fixed;
-
-    right: 38px;
-
-    top: 112px;
-
-    width: 72px;
-    height: 72px;
-
-    object-fit: contain;
-
-    opacity: 0.16;
-
-    z-index: 1;
-
-    pointer-events: none;
-
-    filter:
-        drop-shadow(
-            0 0 15px
-            rgba(255,70,85,0.4)
-        );
-}
-
-
-/* DARK OVERLAY */
-
-.agent-overlay {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 2;
-
-    pointer-events: none;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(8,9,13,0.12),
-            rgba(8,9,13,0.70) 25%,
-            rgba(8,9,13,0.70) 75%,
-            rgba(8,9,13,0.12)
-        );
-}
-
-
-/* ========================================
-   TOPBAR
-======================================== */
-
-.topbar {
-
-    height: 88px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding:
-        0 45px;
-
-    background:
-        rgba(8,9,13,0.90);
-
-    border-bottom:
-        1px solid rgba(255,255,255,0.08);
-
-    backdrop-filter:
-        blur(18px);
-
-    position: relative;
-
-    z-index: 10;
-}
-
-
-.logo {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-}
-
-
-.logo-mark {
-
-    width: 48px;
-    height: 48px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background: #ff4655;
-
-    color: white;
-
-    font-weight: 700;
-
-    font-size: 26px;
-
-    clip-path:
-        polygon(
-            0 0,
-            100% 0,
-            82% 100%,
-            18% 100%
-        );
-
-    box-shadow:
-        0 0 25px rgba(255,70,85,0.40);
-}
-
-
-.logo-title {
-
-    font-size: 22px;
-
-    font-weight: 700;
-
-    letter-spacing: 4px;
-}
-
-
-.logo-subtitle {
-
-    font-size: 11px;
-
-    letter-spacing: 3px;
-
-    color: #8d929d;
-}
-
-
-.admin-badge {
-
-    font-size: 13px;
-
-    letter-spacing: 2px;
-
-    padding:
-        11px 19px;
-
-    border:
-        1px solid rgba(255,70,85,0.4);
-
-    background:
-        rgba(255,70,85,0.07);
-
-    color: #ff7b86;
-}
-
-
-.status-dot {
-
-    display: inline-block;
-
-    width: 7px;
-    height: 7px;
-
-    margin-right: 8px;
-
-    border-radius: 50%;
-
-    background: #ff4655;
-
-    box-shadow:
-        0 0 12px #ff4655;
-
-    animation:
-        pulseDot 1.5s infinite;
-}
-
-
-@keyframes pulseDot {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.4;
-    }
-
-}
-
-
-/* ========================================
-   MAIN
-======================================== */
-
-.main {
-
-    width:
-        min(1250px, calc(100% - 40px));
-
-    margin:
-        0 auto;
-
-    padding:
-        48px 0 90px;
-
-    position: relative;
-
-    z-index: 5;
-}
-
-
-.quiz-header {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: flex-end;
-
-    gap: 30px;
-
-    margin-bottom: 30px;
-}
-
-
-.small-title {
-
-    color: #ff4655;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    letter-spacing: 5px;
-}
-
-
-.quiz-header h1 {
-
-    margin:
-        7px 0 0;
-
-    font-size:
-        clamp(28px, 4vw, 48px);
-
-    line-height: 1;
-
-    text-transform: uppercase;
-
-    letter-spacing: 1px;
-}
-
-
-.header-line {
-
-    width: 100px;
-
-    height: 3px;
-
-    margin-top: 15px;
-
-    background: #ff4655;
-
-    box-shadow:
-        0 0 15px rgba(255,70,85,0.7);
-}
-
-
-.score-box {
-
-    min-width: 155px;
-
-    padding:
-        13px 20px;
-
-    text-align: right;
-
-    background:
-        rgba(255,255,255,0.035);
-
-    border-right:
-        3px solid #ff4655;
-}
-
-
-.score-box span {
-
-    display: block;
-
-    color: #777d88;
-
-    font-size: 11px;
-
-    letter-spacing: 3px;
-}
-
-
-.score-box strong {
-
-    display: block;
-
-    margin-top: 2px;
-
-    font-size: 28px;
-}
-
-
-/* ========================================
-   CARD
-======================================== */
-
-.card {
-
-    position: relative;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(24,26,34,0.98),
-            rgba(12,13,18,0.98)
-        );
-
-    border:
-        1px solid rgba(255,255,255,0.09);
-
-    padding: 28px;
-
-    box-shadow:
-        0 30px 90px rgba(0,0,0,0.55);
-
-    overflow: hidden;
-}
-
-
-.card::before {
-
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 150px;
-    height: 3px;
-
-    background: #ff4655;
-
-    box-shadow:
-        0 0 20px rgba(255,70,85,0.8);
-}
-
-
-.card::after {
-
-    content: "";
-
-    position: absolute;
-
-    right: 0;
-    bottom: 0;
-
-    width: 80px;
-    height: 80px;
-
-    border-right:
-        2px solid rgba(255,70,85,0.45);
-
-    border-bottom:
-        2px solid rgba(255,70,85,0.45);
-}
-
-
-/* ========================================
-   CLIP HEADER
-======================================== */
-
-.clip-header {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 18px;
-
-    padding-bottom: 14px;
-
-    border-bottom:
-        1px solid rgba(255,255,255,0.07);
-}
-
-
-.clip-number {
-
-    color: #ff4655;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    letter-spacing: 3px;
-}
-
-
-.clip-label {
-
-    color: #777d88;
-
-    font-size: 12px;
-
-    letter-spacing: 2px;
-}
-
-
-/* ========================================
-   VIDEO
-======================================== */
-
-.video-wrapper {
-
-    position: relative;
-
-    width: 100%;
-
-    background: #050609;
-
-    border:
-        1px solid rgba(255,255,255,0.10);
-
-    box-shadow:
-        0 25px 60px rgba(0,0,0,0.55);
-}
-
-
-.card video {
-
-    display: block;
-
-    width: 100% !important;
-
-    max-height: 650px !important;
-
-    min-height: 300px;
-
-    object-fit: contain;
-
-    background: #050609;
-
-    border-radius: 0 !important;
-}
-
-
-/* ========================================
-   PLAYER
-======================================== */
-
-.player-info {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    margin-top: 20px;
-
-    padding:
-        14px 18px;
-
-    background:
-        rgba(255,255,255,0.035);
-
-    border-left:
-        3px solid #ff4655;
-}
-
-
-.player-label {
-
-    color: #777d88;
-
-    font-size: 11px;
-
-    letter-spacing: 3px;
-}
-
-
-.player-name {
-
-    color: white;
-
-    font-size: 20px;
-
-    font-weight: 700;
-
-    letter-spacing: 1px;
-}
-
-
-/* ========================================
-   QUESTION
-======================================== */
-
-.question-box {
-
-    margin-top: 28px;
-
-    padding:
-        22px;
-
-    text-align: center;
-
-    background:
-        rgba(255,255,255,0.025);
-
-    border:
-        1px solid rgba(255,255,255,0.06);
-}
-
-
-.question-label {
-
-    color: #ff4655;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    letter-spacing: 4px;
-
-    margin-bottom: 5px;
-}
-
-
-.card h3 {
-
-    margin: 0;
-
-    text-transform: uppercase;
-
-    font-size: 25px;
-
-    letter-spacing: 2px;
-}
-
-
-/* ========================================
-   RANKS
-======================================== */
-
-.ranks {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(9, 1fr);
-
-    gap: 12px;
-
-    margin-top: 20px;
-}
-
-
-.rank-choice {
-
-    position: relative;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    min-height: 120px;
-
-    padding: 10px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.045),
-            rgba(255,255,255,0.015)
-        );
-
-    border:
-        1px solid rgba(255,255,255,0.08);
-
-    cursor: pointer;
-
-    transition:
-        transform 0.18s ease,
-        border 0.18s ease,
-        background 0.18s ease,
-        box-shadow 0.18s ease;
-}
-
-
-.rank-choice:hover {
-
-    transform:
-        translateY(-7px);
-
-    border:
-        1px solid #ff4655;
-
-    background:
-        rgba(255,70,85,0.10);
-
-    box-shadow:
-        0 12px 30px rgba(255,70,85,0.18);
-}
-
-
-.rank-icon {
-
-    width: 78px;
-    height: 78px;
-
-    object-fit: contain;
-
-    transition:
-        transform 0.18s ease,
-        filter 0.18s ease;
-}
-
-
-.rank-choice:hover .rank-icon {
-
-    transform:
-        scale(1.10);
-
-    filter:
-        drop-shadow(
-            0 0 12px
-            rgba(255,70,85,0.55)
-        );
-}
-
-
-.rank-name {
-
-    margin-top: 4px;
-
-    color: #8d929d;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    letter-spacing: 1px;
-
-    text-transform: uppercase;
-}
-
-
-/* ========================================
-   RESULT
-======================================== */
-
-#result {
-
-    margin-top: 25px;
-}
-
-
-.result-box {
-
-    padding:
-        25px;
-
-    text-align: center;
-
-    background:
-        rgba(255,255,255,0.035);
-
-    border:
-        1px solid rgba(255,255,255,0.08);
-
-    border-left:
-        4px solid #ff4655;
-
-    animation:
-        resultIn 0.25s ease;
-}
-
-
-.result-title {
-
-    margin:
-        0 0 10px;
-
-    font-size: 32px;
-
-    text-transform: uppercase;
-
-    letter-spacing: 4px;
-}
-
-
-.result-box img {
-
-    width: 140px;
-
-    height: 140px;
-
-    object-fit: contain;
-
-    filter:
-        drop-shadow(
-            0 0 22px
-            rgba(255,255,255,0.15)
-        );
-}
-
-
-.result-text {
-
-    margin:
-        8px 0 0;
-
-    color: #a7abb4;
-
-    font-size: 17px;
-}
-
-
-.result-text strong {
-
-    color: white;
-}
-
-
-@keyframes resultIn {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(15px);
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-    }
-
-}
-
-
-/* ========================================
-   BUTTON
-======================================== */
-
-button {
-
-    position: relative;
-
-    border: none;
-
-    padding:
-        15px 30px;
-
-    background:
-        #ff4655;
-
-    color: white;
-
-    font-family: inherit;
-
-    font-size: 16px;
-
-    font-weight: 700;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-
-    cursor: pointer;
-
-    clip-path:
-        polygon(
-            0 0,
-            94% 0,
-            100% 30%,
-            100% 100%,
-            6% 100%,
-            0 70%
-        );
-
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
+    document
+        .getElementById("adminPassword")
+        .focus();
 }
-
-
-button:hover {
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 10px 30px
-        rgba(255,70,85,0.40);
-}
-
-
-button:active {
-
-    transform:
-        translateY(0);
-}
-
-
-.next-button-wrapper {
-
-    display: flex;
-
-    justify-content: flex-end;
-
-    margin-top: 22px;
-}
-
-
-/* ========================================
-   COMPLETE
-======================================== */
-
-.complete-card {
-
-    text-align: center;
-
-    padding:
-        60px 30px;
-}
-
-
-.complete-card .trophy {
-
-    font-size: 65px;
-
-    margin-bottom: 15px;
-}
-
-
-.complete-card h1 {
-
-    margin:
-        5px 0;
-
-    font-size: 42px;
-
-    text-transform: uppercase;
-
-    letter-spacing: 3px;
-}
-
-
-.complete-score {
-
-    margin:
-        20px 0 30px;
-
-    font-size: 26px;
-
-    color: #a7abb4;
-}
-
-
-.complete-score strong {
-
-    color: #ff4655;
-
-    font-size: 35px;
-}
-
-
-.error-card {
-
-    text-align: center;
-
-    padding:
-        45px 25px;
-}
-
-
-.error-card h2 {
-
-    color: #ff4655;
-
-    font-size: 30px;
-}
-
-
-/* ========================================
-   MOBILE
-======================================== */
-
-@media (max-width: 1000px) {
-
-    .ranks {
-
-        grid-template-columns:
-            repeat(5, 1fr);
-    }
-
-
-    .waylay-bg {
-
-        left: -190px;
-
-        opacity: 0.25;
-
-        width: 480px;
-    }
-
-
-    .raze-bg {
-
-        right: -190px;
-
-        opacity: 0.25;
-
-        width: 490px;
-    }
-
-}
-
-
-@media (max-width: 700px) {
-
-    .topbar {
-
-        padding:
-            0 20px;
-    }
-
-
-    .main {
-
-        width:
-            calc(100% - 20px);
-
-        padding-top:
-            30px;
-    }
-
-
-    .quiz-header {
-
-        align-items:
-            flex-start;
-
-        flex-direction:
-            column;
-    }
-
-
-    .score-box {
-
-        text-align:
-            left;
-    }
-
-
-    .card {
-
-        padding:
-            18px;
-    }
-
-
-    .card video {
-
-        min-height:
-            220px;
-    }
-
-
-    .ranks {
-
-        grid-template-columns:
-            repeat(3, 1fr);
-    }
-
-
-    .waylay-bg,
-    .raze-bg {
-
-        opacity: 0.12;
-    }
-
-
-    .agent-icon-bg {
-
-        display: none;
-    }
-
-}
-
-
-@media (max-width: 450px) {
-
-    .logo-subtitle {
-
-        display:
-            none;
-    }
-
-
-    .admin-badge {
-
-        font-size:
-            9px;
-
-        padding:
-            8px;
-    }
-
-
-    .logo-title {
-
-        font-size:
-            18px;
-    }
-
-
-    .ranks {
-
-        grid-template-columns:
-            repeat(3, 1fr);
-    }
-
-
-    .rank-choice {
-
-        min-height:
-            100px;
-    }
-
-
-    .rank-icon {
-
-        width:
-            62px;
-
-        height:
-            62px;
-    }
-
-}
-
-`;
-
-document.head.appendChild(style);
-
 
-// ========================================
-// LOGIN
-// ========================================
 
 function adminLogin() {
 
     const input =
-        document.getElementById(
-            "adminPassword"
-        );
+        document.getElementById("adminPassword");
 
     const error =
-        document.getElementById(
-            "loginError"
-        );
+        document.getElementById("loginError");
 
     const box =
-        document.querySelector(
-            ".login-box"
-        );
-
+        document.querySelector(".login-box");
 
     if (!input || !error) {
         return;
     }
 
-
-    if (input.value === "Noxin99") {
+    if (input.value === ADMIN_PASSWORD) {
 
         startAdminPanel();
 
+        return;
     }
 
-    else {
+    error.textContent =
+        "❌ FALSCHES PASSWORT";
 
-        error.textContent =
-            "❌ FALSCHES PASSWORT";
+    input.value = "";
 
-        input.value = "";
+    input.focus();
 
-        input.focus();
+    if (box) {
 
+        box.classList.remove("login-wrong");
 
-        if (box) {
+        void box.offsetWidth;
 
-            box.classList.remove(
-                "login-wrong"
-            );
-
-            void box.offsetWidth;
-
-            box.classList.add(
-                "login-wrong"
-            );
-
-        }
-
+        box.classList.add("login-wrong");
     }
-
 }
 
 
-document
-    .getElementById("loginButton")
-    .addEventListener(
-        "click",
-        adminLogin
-    );
-
-
-document
-    .getElementById("adminPassword")
-    .addEventListener(
-        "keydown",
-        function(event) {
-
-            if (event.key === "Enter") {
-
-                adminLogin();
-
-            }
-
-        }
-    );
-
-
-// ========================================
+// ============================================================
 // ADMIN PANEL
-// ========================================
+// ============================================================
 
 function startAdminPanel() {
 
@@ -1883,6 +186,7 @@ function startAdminPanel() {
 
             <div class="valo-grid"></div>
 
+            <div class="scanlines"></div>
 
             <img
                 class="agent-bg waylay-bg"
@@ -1890,20 +194,17 @@ function startAdminPanel() {
                 alt=""
             >
 
-
             <img
                 class="agent-bg raze-bg"
                 src="/Raze_Artwork_Full.webp"
                 alt=""
             >
 
-
             <img
                 class="agent-icon-bg"
                 src="/Waylay_icon.webp"
                 alt=""
             >
-
 
             <div class="agent-overlay"></div>
 
@@ -1949,7 +250,7 @@ function startAdminPanel() {
                     <div>
 
                         <div class="small-title">
-                            CLIP ANALYSIS
+                            CLIP ANALYSIS // LIVE
                         </div>
 
                         <h1>
@@ -1961,15 +262,54 @@ function startAdminPanel() {
                     </div>
 
 
-                    <div class="score-box">
+                    <div class="header-stats">
 
-                        <span>
-                            SCORE
-                        </span>
+                        <div class="stat-box">
 
-                        <strong id="scoreDisplay">
-                            0 / 0
-                        </strong>
+                            <div class="stat-label">
+                                SCORE
+                            </div>
+
+                            <strong
+                                class="stat-value"
+                                id="scoreDisplay"
+                            >
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat-box">
+
+                            <div class="stat-label">
+                                ACCURACY
+                            </div>
+
+                            <strong
+                                class="stat-value"
+                                id="accuracyDisplay"
+                            >
+                                0%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat-box">
+
+                            <div class="stat-label">
+                                STREAK
+                            </div>
+
+                            <strong
+                                class="stat-value"
+                                id="streakDisplay"
+                            >
+                                0
+                            </strong>
+
+                        </div>
 
                     </div>
 
@@ -1981,62 +321,71 @@ function startAdminPanel() {
             </main>
 
         </div>
-
     `;
 
-
     loadClips();
-
 }
 
 
-// ========================================
-// QUIZ
-// ========================================
-
-let allClips = [];
-
-let currentClip = 0;
-
-let score = 0;
-
-let total = 0;
-
-
-// ========================================
-// CLIPS LADEN
-// ========================================
+// ============================================================
+// LOAD CLIPS
+// ============================================================
 
 async function loadClips() {
+
+    const clips =
+        document.getElementById("clips");
+
+    if (!clips) {
+        return;
+    }
+
+    clips.innerHTML = `
+        <div class="card">
+            <div class="question-box">
+                <div class="question-label">
+                    SYSTEM
+                </div>
+
+                <h3>
+                    CLIPS WERDEN GELADEN...
+                </h3>
+            </div>
+        </div>
+    `;
 
     try {
 
         const response =
             await fetch("/submissions");
 
-
         if (!response.ok) {
-
             throw new Error(
-                "Clips konnten nicht geladen werden."
+                "HTTP " + response.status
             );
-
         }
 
-
-        allClips =
+        const data =
             await response.json();
 
+        if (!Array.isArray(data)) {
+            throw new Error(
+                "Ungültige Clip-Daten."
+            );
+        }
+
+        allClips = data;
 
         currentClip = 0;
-
         score = 0;
+        correctAnswers = 0;
+        wrongAnswers = 0;
+        streak = 0;
+        bestStreak = 0;
 
-        total =
-            allClips.length;
+        total = allClips.length;
 
-
-        updateScore();
+        updateStats();
 
         showClip();
 
@@ -2044,123 +393,119 @@ async function loadClips() {
 
     catch (error) {
 
-        console.error(error);
+        console.error(
+            "Clip loading error:",
+            error
+        );
 
+        clips.innerHTML = `
 
-        const clips =
-            document.getElementById(
-                "clips"
-            );
+            <div class="card error-card">
 
+                <h2>
+                    ❌ SYSTEM ERROR
+                </h2>
 
-        if (clips) {
+                <p>
+                    Die Clips konnten nicht geladen werden.
+                </p>
 
-            clips.innerHTML = `
+                <p>
+                    ${escapeHTML(error.message)}
+                </p>
 
-                <div class="card error-card">
+                <button
+                    onclick="loadClips()"
+                >
+                    🔄 ERNEUT VERSUCHEN
+                </button>
 
-                    <h2>
-                        ❌ FEHLER
-                    </h2>
-
-                    <p>
-                        Die Clips konnten nicht geladen werden.
-                    </p>
-
-                </div>
-
-            `;
-
-        }
-
+            </div>
+        `;
     }
-
 }
 
 
-// ========================================
-// CLIP ANZEIGEN
-// ========================================
+// ============================================================
+// SHOW CLIP
+// ============================================================
 
 function showClip() {
 
     const clips =
-        document.getElementById(
-            "clips"
-        );
-
+        document.getElementById("clips");
 
     if (!clips) {
         return;
     }
 
-
     if (currentClip >= allClips.length) {
 
-        clips.innerHTML = `
-
-            <div class="card complete-card">
-
-                <div class="trophy">
-                    🏆
-                </div>
-
-                <div class="small-title">
-                    QUIZ COMPLETE
-                </div>
-
-                <h1>
-                    ALLE CLIPS GESPIELT!
-                </h1>
-
-                <div class="complete-score">
-
-                    Ergebnis:
-
-                    <strong>
-                        ${score} / ${total}
-                    </strong>
-
-                </div>
-
-                <button
-                    onclick="restartQuiz()"
-                >
-                    🔄 NOCHMAL SPIELEN
-                </button>
-
-            </div>
-
-        `;
+        showComplete();
 
         return;
     }
 
+    answered = false;
 
     const item =
         allClips[currentClip];
 
+    const progress =
+        total > 0
+            ? ((currentClip) / total) * 100
+            : 0;
+
+    const playerName =
+        escapeHTML(
+            item.riot_name || "UNKNOWN PLAYER"
+        );
+
+    const clipUrl =
+        escapeAttribute(
+            item.clip_url || ""
+        );
 
     clips.innerHTML = `
 
-        <div class="card">
+        <div class="card clip-enter">
+
+            <div class="progress-area">
+
+                <div class="progress-info">
+
+                    <span>
+                        QUIZ PROGRESS
+                    </span>
+
+                    <span>
+                        ${currentClip} / ${total}
+                    </span>
+
+                </div>
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-fill"
+                        style="width:${progress}%"
+                    ></div>
+
+                </div>
+
+            </div>
 
 
             <div class="clip-header">
 
                 <span class="clip-number">
-
                     CLIP ${currentClip + 1}
                     /
-                    ${allClips.length}
-
+                    ${total}
                 </span>
 
-
                 <span class="clip-label">
-
                     NOXIN99 • GUESS THE RANK
-
                 </span>
 
             </div>
@@ -2171,8 +516,9 @@ function showClip() {
                 <video
                     controls
                     preload="metadata"
-                    src="${item.clip_url}">
-                </video>
+                    playsinline
+                    src="${clipUrl}"
+                ></video>
 
             </div>
 
@@ -2186,11 +532,10 @@ function showClip() {
                     </div>
 
                     <div class="player-name">
-                        ${item.riot_name}
+                        ${playerName}
                     </div>
 
                 </div>
-
 
                 <div class="clip-label">
                     ANALYZING CLIP
@@ -2214,168 +559,7 @@ function showClip() {
 
             <div class="ranks">
 
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Iron')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Iron_1_Rank.webp"
-                        alt="Iron"
-                    >
-
-                    <div class="rank-name">
-                        Iron
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Bronze')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Bronze_1_Rank.webp"
-                        alt="Bronze"
-                    >
-
-                    <div class="rank-name">
-                        Bronze
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Silver')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Silver_1_Rank.webp"
-                        alt="Silver"
-                    >
-
-                    <div class="rank-name">
-                        Silver
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Gold')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Gold_1_Rank.webp"
-                        alt="Gold"
-                    >
-
-                    <div class="rank-name">
-                        Gold
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Platinum')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Platinum_1_Rank.webp"
-                        alt="Platinum"
-                    >
-
-                    <div class="rank-name">
-                        Platinum
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Diamond')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Diamond_1_Rank.webp"
-                        alt="Diamond"
-                    >
-
-                    <div class="rank-name">
-                        Diamond
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Ascendant')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Ascendant_1_Rank.webp"
-                        alt="Ascendant"
-                    >
-
-                    <div class="rank-name">
-                        Ascendant
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Immortal')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Immortal_1_Rank.webp"
-                        alt="Immortal"
-                    >
-
-                    <div class="rank-name">
-                        Immortal
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rank-choice"
-                    onclick="guess('${item.rank}', 'Radiant')"
-                >
-
-                    <img
-                        class="rank-icon"
-                        src="/Radiant_Rank.webp"
-                        alt="Radiant"
-                    >
-
-                    <div class="rank-name">
-                        Radiant
-                    </div>
-
-                </div>
-
+                ${createRankButtons()}
 
             </div>
 
@@ -2395,77 +579,348 @@ function showClip() {
 
             </div>
 
-
         </div>
-
     `;
-
 }
 
 
-// ========================================
-// RANG RATEN
-// ========================================
+// ============================================================
+// CREATE RANK BUTTONS
+// ============================================================
 
-function guess(realRank, selectedRank) {
+function createRankButtons() {
 
-    realRank =
-        realRank
-            .replace(
-                "Diamant",
-                "Diamond"
-            )
-            .replace(
-                "Platin",
-                "Platinum"
-            );
+    let html = "";
+
+    for (const rank of RANKS) {
+
+        const icon =
+            RANK_ICONS[rank];
+
+        /*
+         * Jeder Rang bekommt drei Stufen.
+         *
+         * Radiant und Immortal haben in VALORANT
+         * besondere Regeln. Für das Quiz behandeln
+         * wir sie trotzdem als 1 / 2 / 3 Auswahl,
+         * damit das UI einheitlich bleibt.
+         */
+
+        for (let tier = 1; tier <= 3; tier++) {
+
+            html += `
+
+                <div
+                    class="rank-choice"
+                    data-rank="${rank}"
+                    data-tier="${tier}"
+                    onclick="guess('${rank}', ${tier})"
+                >
+
+                    <img
+                        class="rank-icon"
+                        src="${icon}"
+                        alt="${rank} ${tier}"
+                    >
+
+                    <div class="rank-name">
+                        ${rank} ${tier}
+                    </div>
+
+                </div>
+            `;
+        }
+    }
+
+    return html;
+}
 
 
-    const result =
-        document.getElementById(
-            "result"
+// ============================================================
+// GUESS
+// ============================================================
+
+function guess(selectedRank, selectedTier) {
+
+    if (answered) {
+        return;
+    }
+
+    const item =
+        allClips[currentClip];
+
+    if (!item) {
+        return;
+    }
+
+    answered = true;
+
+    const real =
+        parseRank(
+            item.rank
         );
 
+    const selected = {
+        rank: selectedRank,
+        tier: selectedTier
+    };
+
+    const isCorrect =
+        ranksMatch(real, selected);
+
+    const choices =
+        document.querySelectorAll(
+            ".rank-choice"
+        );
+
+    choices.forEach(choice => {
+
+        choice.style.pointerEvents =
+            "none";
+
+        const choiceRank =
+            choice.dataset.rank;
+
+        const choiceTier =
+            Number(choice.dataset.tier);
+
+        if (
+            choiceRank === selected.rank &&
+            choiceTier === selected.tier
+        ) {
+
+            choice.classList.add(
+                isCorrect
+                    ? "correct"
+                    : "wrong"
+            );
+
+        }
+
+        if (
+            real.rank === choiceRank &&
+            real.tier === choiceTier
+        ) {
+
+            choice.classList.add("correct");
+        }
+
+    });
+
+
+    if (isCorrect) {
+
+        score++;
+
+        correctAnswers++;
+
+        streak++;
+
+        if (streak > bestStreak) {
+            bestStreak = streak;
+        }
+
+    }
+
+    else {
+
+        wrongAnswers++;
+
+        streak = 0;
+    }
+
+
+    updateStats();
+
+
+    document
+        .querySelector(".valo-background")
+        ?.classList.add("result-flash");
+
+    setTimeout(() => {
+
+        document
+            .querySelector(".valo-background")
+            ?.classList.remove("result-flash");
+
+    }, 350);
+
+
+    showResult(
+        real,
+        selected,
+        isCorrect
+    );
+}
+
+
+// ============================================================
+// PARSE RANK
+// ============================================================
+
+function parseRank(value) {
+
+    if (value === undefined || value === null) {
+
+        return {
+            rank: "Unknown",
+            tier: null,
+            generic: true
+        };
+    }
+
+    let text =
+        String(value)
+            .trim()
+            .toLowerCase();
+
+    text =
+        text
+            .replace(/diamant/g, "diamond")
+            .replace(/platin/g, "platinum")
+            .replace(/aufsteigend/g, "ascendant")
+            .replace(/unsterblich/g, "immortal")
+            .replace(/strahlend/g, "radiant");
+
+    let rank =
+        RANKS.find(
+            r =>
+                text.startsWith(
+                    r.toLowerCase()
+                )
+        );
+
+    if (!rank) {
+
+        return {
+            rank: String(value),
+            tier: null,
+            generic: true
+        };
+    }
+
+    const tierMatch =
+        text.match(
+            /(?:^|\s)([123])(?:\s|$)/
+        );
+
+    const tier =
+        tierMatch
+            ? Number(tierMatch[1])
+            : null;
+
+    return {
+        rank,
+        tier,
+        generic: tier === null
+    };
+}
+
+
+// ============================================================
+// RANK MATCH
+// ============================================================
+
+function ranksMatch(real, selected) {
+
+    if (
+        real.rank === "Unknown"
+    ) {
+        return false;
+    }
+
+    if (
+        real.rank !== selected.rank
+    ) {
+        return false;
+    }
+
+    /*
+     * Falls dein Upload-System momentan nur
+     * "Diamond" statt "Diamond 1" speichert,
+     * wird jede Diamond-Stufe als Diamond gewertet.
+     *
+     * Sobald "Diamond 1/2/3" gespeichert wird,
+     * wird exakt verglichen.
+     */
+
+    if (real.generic) {
+        return true;
+    }
+
+    return real.tier === selected.tier;
+}
+
+
+// ============================================================
+// RESULT
+// ============================================================
+
+function showResult(
+    real,
+    selected,
+    isCorrect
+) {
+
+    const result =
+        document.getElementById("result");
 
     if (!result) {
         return;
     }
 
+    const image =
+        RANK_ICONS[real.rank];
 
-    const img =
-        rankImages[realRank];
+    const realText =
+        real.tier
+            ? `${real.rank} ${real.tier}`
+            : real.rank;
+
+    const selectedText =
+        `${selected.rank} ${selected.tier}`;
 
 
-    if (realRank === selectedRank) {
-
-        score++;
-
+    if (isCorrect) {
 
         result.innerHTML = `
 
-            <div class="result-box">
+            <div class="result-box correct-result">
 
                 <h2 class="result-title">
                     ✅ RICHTIG!
                 </h2>
 
                 <img
-                    src="${img}"
-                    alt="${realRank}"
+                    src="${image || ""}"
+                    alt="${escapeAttribute(realText)}"
                 >
 
                 <p class="result-text">
 
-                    Der echte Rang ist:
+                    Dein Tipp:
 
                     <strong>
-                        ${realRank}
+                        ${escapeHTML(selectedText)}
                     </strong>
 
                 </p>
 
-            </div>
+                <p class="result-text">
 
+                    Echter Rang:
+
+                    <strong>
+                        ${escapeHTML(realText)}
+                    </strong>
+
+                </p>
+
+                <div class="result-points">
+                    +1 PUNKT
+                </div>
+
+            </div>
         `;
 
     }
@@ -2485,14 +940,14 @@ function guess(realRank, selectedRank) {
                     Dein Tipp:
 
                     <strong>
-                        ${selectedRank}
+                        ${escapeHTML(selectedText)}
                     </strong>
 
                 </p>
 
                 <img
-                    src="${img}"
-                    alt="${realRank}"
+                    src="${image || ""}"
+                    alt="${escapeAttribute(realText)}"
                 >
 
                 <p class="result-text">
@@ -2500,19 +955,18 @@ function guess(realRank, selectedRank) {
                     Echter Rang:
 
                     <strong>
-                        ${realRank}
+                        ${escapeHTML(realText)}
                     </strong>
 
                 </p>
 
+                <div class="result-points">
+                    +0 PUNKTE
+                </div>
+
             </div>
-
         `;
-
     }
-
-
-    updateScore();
 
 
     const nextButton =
@@ -2520,72 +974,256 @@ function guess(realRank, selectedRank) {
             "nextButton"
         );
 
-
     if (nextButton) {
 
         nextButton.style.display =
             "inline-block";
 
     }
-
-
-    const rankIcons =
-        document.querySelectorAll(
-            ".rank-choice"
-        );
-
-
-    rankIcons.forEach(choice => {
-
-        choice.style.pointerEvents =
-            "none";
-
-        choice.style.opacity =
-            "0.45";
-
-    });
-
 }
 
 
-// ========================================
-// SCORE
-// ========================================
+// ============================================================
+// STATS
+// ============================================================
 
-function updateScore() {
+function updateStats() {
 
     const scoreDisplay =
         document.getElementById(
             "scoreDisplay"
         );
 
+    const accuracyDisplay =
+        document.getElementById(
+            "accuracyDisplay"
+        );
+
+    const streakDisplay =
+        document.getElementById(
+            "streakDisplay"
+        );
+
+    const answeredCount =
+        correctAnswers +
+        wrongAnswers;
+
+    const accuracy =
+        answeredCount > 0
+            ? Math.round(
+                (correctAnswers /
+                answeredCount) *
+                100
+            )
+            : 0;
 
     if (scoreDisplay) {
 
         scoreDisplay.textContent =
             `${score} / ${total}`;
-
     }
 
+    if (accuracyDisplay) {
+
+        accuracyDisplay.textContent =
+            `${accuracy}%`;
+    }
+
+    if (streakDisplay) {
+
+        streakDisplay.textContent =
+            streak;
+    }
 }
 
 
-// ========================================
-// NÄCHSTER CLIP
-// ========================================
+// ============================================================
+// NEXT CLIP
+// ============================================================
 
 function nextClip() {
+
+    if (!answered) {
+        return;
+    }
 
     currentClip++;
 
     showClip();
-
 }
 
 
-// ========================================
-// NEUSTART
-// ========================================
+// ============================================================
+// COMPLETE SCREEN
+// ============================================================
+
+function showComplete() {
+
+    const clips =
+        document.getElementById("clips");
+
+    if (!clips) {
+        return;
+    }
+
+    const accuracy =
+        total > 0
+            ? Math.round(
+                (correctAnswers /
+                total) *
+                100
+            )
+            : 0;
+
+    const title =
+        getFinalTitle(
+            accuracy
+        );
+
+
+    clips.innerHTML = `
+
+        <div class="card complete-card clip-enter">
+
+            <div class="complete-trophy">
+                🏆
+            </div>
+
+            <div class="small-title">
+                QUIZ COMPLETE
+            </div>
+
+            <h1>
+                ALLE CLIPS GESPIELT
+            </h1>
+
+            <div class="complete-rank">
+                ${title}
+            </div>
+
+            <div class="complete-score">
+
+                Ergebnis:
+
+                <strong>
+                    ${score} / ${total}
+                </strong>
+
+            </div>
+
+
+            <div class="complete-stats">
+
+                <div class="complete-stat">
+
+                    <span>
+                        ACCURACY
+                    </span>
+
+                    <strong>
+                        ${accuracy}%
+                    </strong>
+
+                </div>
+
+
+                <div class="complete-stat">
+
+                    <span>
+                        RICHTIG
+                    </span>
+
+                    <strong>
+                        ${correctAnswers}
+                    </strong>
+
+                </div>
+
+
+                <div class="complete-stat">
+
+                    <span>
+                        FALSCH
+                    </span>
+
+                    <strong>
+                        ${wrongAnswers}
+                    </strong>
+
+                </div>
+
+
+                <div class="complete-stat">
+
+                    <span>
+                        BEST STREAK
+                    </span>
+
+                    <strong>
+                        ${bestStreak}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <button
+                onclick="restartQuiz()"
+            >
+                🔄 NOCHMAL SPIELEN
+            </button>
+
+        </div>
+    `;
+}
+
+
+// ============================================================
+// FINAL TITLE
+// ============================================================
+
+function getFinalTitle(accuracy) {
+
+    if (accuracy >= 95) {
+        return "🔥 RADIANT GUESSER";
+    }
+
+    if (accuracy >= 90) {
+        return "💎 IMMORTAL GUESSER";
+    }
+
+    if (accuracy >= 80) {
+        return "🌿 ASCENDANT GUESSER";
+    }
+
+    if (accuracy >= 70) {
+        return "💠 DIAMOND GUESSER";
+    }
+
+    if (accuracy >= 60) {
+        return "🏆 PLATINUM GUESSER";
+    }
+
+    if (accuracy >= 50) {
+        return "🥇 GOLD GUESSER";
+    }
+
+    if (accuracy >= 40) {
+        return "🥈 SILVER GUESSER";
+    }
+
+    if (accuracy >= 25) {
+        return "🥉 BRONZE GUESSER";
+    }
+
+    return "⚙️ IRON GUESSER";
+}
+
+
+// ============================================================
+// RESTART
+// ============================================================
 
 function restartQuiz() {
 
@@ -2593,50 +1231,45 @@ function restartQuiz() {
 
     score = 0;
 
-    updateScore();
+    correctAnswers = 0;
+
+    wrongAnswers = 0;
+
+    streak = 0;
+
+    bestStreak = 0;
+
+    answered = false;
+
+    updateStats();
 
     showClip();
-
 }
 
 
-// ========================================
-// RANG-BILDER
-// ========================================
+// ============================================================
+// HTML SAFETY
+// ============================================================
 
-const rankImages = {
+function escapeHTML(value) {
 
-    "Iron":
-        "/Iron_1_Rank.webp",
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
 
-    "Bronze":
-        "/Bronze_1_Rank.webp",
 
-    "Silver":
-        "/Silver_1_Rank.webp",
+function escapeAttribute(value) {
 
-    "Gold":
-        "/Gold_1_Rank.webp",
+    return escapeHTML(value);
+}
 
-    "Platinum":
-        "/Platinum_1_Rank.webp",
 
-    "Diamond":
-        "/Diamond_1_Rank.webp",
+// ============================================================
+// START
+// ============================================================
 
-    "Ascendant":
-        "/Ascendant_1_Rank.webp",
-
-    "Immortal":
-        "/Immortal_1_Rank.webp",
-
-    "Radiant":
-        "/Radiant_Rank.webp",
-
-    "Platin":
-        "/Platinum_1_Rank.webp",
-
-    "Diamant":
-        "/Diamond_1_Rank.webp"
-
-};
+renderLogin();
