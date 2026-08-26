@@ -8,6 +8,12 @@ if (password !== "Noxin99") {
     throw new Error("Kein Zugriff");
 
 }
+let allClips = [];
+let currentClip = 0;
+
+let score = 0;
+let total = 0;
+
 async function loadClips() {
 
     const clips =
