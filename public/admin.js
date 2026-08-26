@@ -80,25 +80,6 @@ function showClip() {
             ➡️ Nächster Clip
         </button>
 
-    `;
-
-}
-    const clips =
-        document.getElementById("clips");
-
-    clips.innerHTML =
-        "Lade Clips...";
-
-    const response =
-        await fetch("/submissions");
-
-    const data =
-        await response.json();
-
-    clips.innerHTML = "";
-
-    data.forEach(item => {
-
         clips.innerHTML += `
 
             <div style="
