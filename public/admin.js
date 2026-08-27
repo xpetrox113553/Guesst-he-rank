@@ -831,12 +831,12 @@ function normalizeRank(rank) {
 function guess(realRank, selectedRank) {
 
     // Rangnamen vereinheitlichen
-    realRank = String(realRank)
-        .trim()
-        .replace(/Platinuminum/gi, "Platinum")
-        .replace(/Platinumum/gi, "Platinum")
-        .replace(/Platin/gi, "Platinum")
-        .replace(/Diamant/gi, "Diamond");
+   realRank = String(realRank)
+    .trim()
+    .replace(/Platinumum/gi, "Platinum")
+    .replace(/Platinumumm?/gi, "Platinum")
+    .replace(/Platin/gi, "Platinum")
+    .replace(/Diamant/gi, "Diamond");
 
     const result =
         document.getElementById("result");
@@ -855,10 +855,12 @@ function guess(realRank, selectedRank) {
         rankImages[rankBase] ||
         rankImages[realRank];
 
-    const isCorrect =
-        realRank.toLowerCase() ===
-        selectedRank.toLowerCase();
+   const isCorrect =
+    realRank.toLowerCase() ===
+    selectedRank.toLowerCase();
 
+answered = true;
+    
     if (isCorrect) {
 
         score++;
