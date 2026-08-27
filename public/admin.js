@@ -1260,3 +1260,4 @@ const RANK_NAMES = {
 
     "Radiant": "Radiant"
 };
+const displayRank = RANK_NAMES[item.rank] || item.rank;
