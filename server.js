@@ -32,8 +32,16 @@ app.post(
             const riotName =
                 req.body.riotName;
 
-            const rank =
-                req.body.rank;
+            let rank =
+    req.body.rank;
+
+rank = String(rank)
+    .trim()
+    .replace(/Platinumum/gi, "Platinum")
+    .replace(/Platinuminum/gi, "Platinum")
+    .replace(/Platininum/gi, "Platinum")
+    .replace(/Platin(?!um)/gi, "Platinum")
+    .replace(/Diamant/gi, "Diamond");
 
             const file =
                 req.file;
