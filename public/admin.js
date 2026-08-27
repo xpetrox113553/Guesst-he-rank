@@ -745,19 +745,10 @@ function selectRank(selectedRank) {
     if (!item) {
         return;
     }
-
-
-    const realRank =
-        normalizeRank(
-            item.rank
-        );
-
-
-    const selected =
-        normalizeRank(
-            selectedRank
-        );
-
+    
+  const realRank = item.rank;
+    
+    const selected = selectedRank;
 
     guess(
         realRank,
